@@ -1,0 +1,2668 @@
+
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>clicker coin -- Ultimate Edition 7.0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Eater&family=Exo+2:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-glow: #1fbb14;
+      --secondary-glow: #00f260;
+      --background-start: #0f0c29;
+      --background-mid: #2518b3;
+      --background-end: #32326e;
+      --text-color: #fff;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --border-color: rgba(255, 255, 255, 0.2);
+      --button-bg: linear-gradient(to right, var(--primary-glow), #4a00e0);
+      --card-bg: rgba(30, 30, 46, 0.6);
+      --blood-red: #ba1515;
+      --dark-blood: #3b0000;
+      --cosmic-purple: #6e02bc;
+      --neon-cyan: #00ffff;
+      --electric-blue: #7df9ff;
+      --lava-orange: #ff7f00;
+      --toxic-green: #39ff14;
+    }
+    
+    body[data-theme="cyber-blue"] {
+      --primary-glow: #00ffff;
+      --secondary-glow: #0077ff;
+      --background-start: #0a192f;
+      --background-mid: #172a46;
+      --background-end: #020c1b;
+      --button-bg: linear-gradient(to right, var(--primary-glow), var(--secondary-glow));
+    }
+    
+    body[data-theme="golden-empire"] {
+      --primary-glow: #ffd700;
+      --secondary-glow: #fbb034;
+      --background-start: #1a1a1a;
+      --background-mid: #252525;
+      --background-end: #000000;
+      --button-bg: linear-gradient(to right, #fbb034, #ffdd00);
+    }
+    
+    body[data-theme="neon-ninja"] {
+      --primary-glow: #00ff9d;
+      --secondary-glow: #8a2be2;
+      --background-start: #0c0c1d;
+      --background-mid: #1a1a2e;
+      --background-end: #16213e;
+      --button-bg: linear-gradient(to right, #00ff9d, #8a2be2);
+    }
+    
+    body[data-theme="rainbow-delight"] {
+      --primary-glow: #ff0000;
+      --secondary-glow: #0000ff;
+      --background-start: #ff0000;
+      --background-mid: #00ff00;
+      --background-end: #0000ff;
+      --button-bg: linear-gradient(to right, #ff0000, #00ff00, #0000ff);
+    }
+    
+    body[data-theme="cosmic-void"] {
+      --primary-glow: #8a2be2;
+      --secondary-glow: #00bfff;
+      --background-start: #000000;
+      --background-mid: #1a0033;
+      --background-end: #000033;
+      --button-bg: linear-gradient(to right, #8a2be2, #00bfff);
+    }
+    
+    body[data-theme="lava-flow"] {
+      --primary-glow: #ff4500;
+      --secondary-glow: #ffa500;
+      --background-start: #2b0000;
+      --background-mid: #5a0000;
+      --background-end: #8b0000;
+      --button-bg: linear-gradient(to right, #ff4500, #ffa500);
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Exo 2', sans-serif;
+      background: linear-gradient(to bottom right, var(--background-start), var(--background-mid), var(--background-end));
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+      user-select: none;
+      touch-action: manipulation;
+      transition: background 0.5s;
+    }
+    
+    .background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+    
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(130px);
+      opacity: 0.33;
+      mix-blend-mode: lighten;
+      pointer-events: none;
+      transition: background 0.5s;
+    }
+    
+    .blob1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--primary-glow), transparent 60%);
+      animation: moveBlob1 15s infinite alternate ease-in-out;
+    }
+    
+    .blob2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--secondary-glow), transparent 70%);
+      animation: moveBlob2 20s infinite alternate-reverse ease-in-out;
+    }
+    
+    .blob3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--cosmic-purple), transparent 70%);
+      animation: moveBlob3 25s infinite alternate ease-in-out;
+    }
+    
+    @keyframes moveBlob1 {
+      from {
+        transform: translate(-20vw, -20vh) scale(1.2);
+      }
+      to {
+        transform: translate(20vw, 30vh) scale(0.8);
+      }
+    }
+    
+    @keyframes moveBlob2 {
+      from {
+        transform: translate(30vw, 40vh) scale(0.9);
+      }
+      to {
+        transform: translate(-30vw, -10vh) scale(1.3);
+      }
+    }
+    
+    @keyframes moveBlob3 {
+      from {
+        transform: translate(10vw, 10vh) scale(1.1);
+      }
+      to {
+        transform: translate(-10vw, -30vh) scale(0.9);
+      }
+    }
+    
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeInContent 1s 1s forwards;
+      text-align: center;
+      padding: 20px;
+      max-width: 90%;
+    }
+    
+    @keyframes fadeInContent {
+      to {
+        opacity: 1;
+      }
+    }
+    
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(28px, 5vw, 48px);
+      margin-bottom: 10px;
+      z-index: 1;
+      text-shadow: 0 0 5px var(--text-color), 0 0 15px var(--primary-glow), 0 0 25px var(--primary-glow);
+      transition: text-shadow 0.5s;
+      background: linear-gradient(to right, var(--primary-glow), var(--secondary-glow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    #score,
+    #scoreBottom {
+      font-size: clamp(18px, 3vw, 24px);
+      margin-bottom: 20px;
+      z-index: 1;
+      font-weight: 600;
+      background: var(--glass-bg);
+      border-radius: 12px;
+      padding: 5px 18px;
+      box-shadow: 0 1px 8px #0003;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+    }
+    
+    #scoreBottom {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .circle-button {
+      width: 180px;
+      height: 180px;
+      background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUSEhIVFhUXFRcYFhgWFxUXGBgYFxUWFxUXFRsYHyggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0mHyYrLS0vNy0tLS0tLS0tLS0tLi0tLy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAADBAIFBgABB//EAEQQAAIAAwQGBggEBAQHAQAAAAECAAMRBCExQQUSUWFxgRMiMlKRoQYUQnKxwdHwI2KCkjOisuFTc8LSFSRDVGPD8aP/xAAaAQACAwEBAAAAAAAAAAAAAAAAAwECBAUG/8QAMBEAAgIBBAAFAwIFBQAAAAAAAAECAxEEEiExBRMiQVEyYXGRsRQjQkOBJFKhweH/2gAMAwEAAhEDEQA/APuEQn9k/ecd0y7fjEZjgigxgAVg9lz5RDoW2fCJyur2rqwAMQpaO1B+mXb8YFMQsajCAAMPiFOhbZ8ILMtSLi3x8tsQ2ksslLPROd2TCZMezJ7sKAao2teeQy5wBpKC9jWmbG7wwEY7NbGP08l1X8hZFsUVpVvdBPwughtjZS6e8wHkKxTWj0js6nVVzMbuylL/AAuELtpi0N/DspA2zXVf5RUxis8Ql84Gqr7F1MZya1QcAT9IgQ3fH7f7xSl7a3tyE4KzfExA2a1HG1gcJK/Mxklr5f7v3Gqr8F/08we2P2j6xzWp6U1kP6SPnGe9VtX/AHfjJX5GPClrH/VlNxRl+Bin8fP2l+5ZUovhaGzUH3W+RpB7NbVB61V94UHjhGYNttK9qzqw2y5gr4MB8Y5dPILn15R/OpA8cIbDxS1fcHpos2yOCKggjcawvaceUUEm0g9ZSPeQ0+Fx5w2lvbM63grfQ+UbqfFqp8S4Yielkuh+HkwHCK6zzQ/ZxzBuI5GHhNAurHTjJSWYsztNcMlMwPCEoaaYCKA3wHoW2fCLEErLjyhmF5Q1bzdBOmXb8YABWnHl9YDB5q6xqL4h0LbPhABCOifQts+EdAAOCSO0PvKJ+rb/ACjui1etWtP/AJAAxALVlzjvWd3nHdvdSABeG5B6sBmygoqzUAha9h1rlyXM72+kIuvjUvuXjDIeZay10vDNjh+nb8IVmPLlAu7AbXcj7HARX6T02EbopS9JN7o7Kb5h9kboQl6MLsJlpbpXyGEtNyrnxMcTUazL9TNMKg8zTk2ddZZfV/xZoIXiq4tAf+D651rRMecdhOrLHBR84s3BFxiBaOZZfOTHxgl0e2eSq0VFCjYAB8Im9xoY8sk5Caa3W7puPEVxHCGLRNopalSATTM0vpFo05jlvkhywxWsTRDW8GkIywaHWNS17bL8huAuhiysQDVqqMK4gbCcxCYKLlgZJNI9KkEihIrcdxv/ALRAtELdPJChGoGNNYX3UJ6u+7GAKQgoFJGwUrvN5vMRYlngvBPA1lWBT6AdYChIFDnW4CkeyrQGHVqKZEEEcawvaVqyscBWg/Mbq+FRzivCLJMUm6Jl11petKbbLNBzXA+EQ9Znyv4iianelijj3lz5Q+WjyZdQ7fsRVSb75GYCWG2pNAZG1gNhoyn4qYs5VqYdrrLtp1h7wGI3iM1abEGbXQmXMydcf1DBhxhvR+mCrCXaAEY3LMHYc5D8rbjHR0eplB+l/wCDPdSmujUyGBIINQaUIh6KVJZU60vGtSuTcO60PyLeGFQMLiDiDsIj0tGoVi+5zJw2hbVhzhaGNbXuwzjz1bf5RoFk7NhzgsA1tS7HOO9Z3ecADEdAPWd0dAAaBz+yfvOAdO22JI5Y0OEAAYLKmBQzE0A/vBjJWKx3DHWHZHZG094/KM+ovVUc+5eENzCMxY6zfpXZvP5vhFDpDSrzWMmzGlLpk3Jdqptb4RDS9vaa5s0lqU/jTB7I7i/mPlDFhsqoolywABgPvOPN6jUybwu2boVJLLPLDY0lLqoN5JvZjtY5mGUUsaCPUs5rfcPvCEEbXVWNQSAbiRiK5GMLTXqmPXPRfGlADfSKu0g9IzHCgC8BefMnwECa2FJdASXJousa3nM7QLzygLFzjNY/pT5LD7rYyhhe5SuppjAnBTrNgL8K+G+A+szW62tq1wUgMAPzZk8DEkQsaAE8Ibl6MY9ogeZhNStaxBDZbIvMhCUTTrUxyrSnOIzZet2iSvd9mu097nFwujUGJY+Aifqcvu+Zhn8LZ22kU8+HwUDyBUEEreCQMDQ7PmIKWi3ayy+75mATLGmVRz+sUlRL5RdXR+Cqnu1NVbq4tsGdN+yBerLlUcGYeNDfFhNsXdavG6E5qFcRCmpIbFxfR6s4qeyGXheN+8RZrLinWZQg40vpHPa5hOsXKnILgONR1jxhlbjj1ETg2+CU6czOSbgpKqvA0LHefIQKcqsCrAEHEGOQs7mpWrEUpcCaUzzi00folteswUUX44nIRdVTsn6egc4wjyVujNLNZiEmktIwDm9pWwN3k35RqJ0qtJksjWpd3XGQPyOUZO0yGUsrKaVIvBoRUiu8R5obShszCW5/AY9Un/pMcj+Q+Ub9PqXF7J9oz20qS3xNto2eHqRccCDiDmDD0Uk1irdKnap1h31/3DLwh6Va9YBlNQRUR39PerF9zm2Q2k7Tjy+sChmWusKmJdCuyNAsVjob6BdnxjyABSCSO0PvKG6QC2zAqFtnxrcIhtJZZKWeBbSM6p6MYYvwyXn8IoNO6SZQsqV/FmXL+Rc3O4Q3abQJaMznAFnO/P6RQ6MVmLWiYOvMwHcQdlR8Txjy2s1bnJy/Q6VFI5YbMspAi8STizHFjvMO2YVNa0Az+UAlrrGghZlVryoNCReAcCRHMi+d8jU454RdzJ66pYkatDU1upnFS0+XcJYamHZIUcCaV5VgE0nV1FHVYitLqAGp5GlOcGlqWIVRUmGznvwkisK9nJ7SpF1TgNt+yLOy6MzmftHzMM2SyLLG1szs3CCs8aatNGHM+WZ7L3LiJJQFFFAA3R4XgZaPTKY5HyHxNY1euS9KEcLs8Z4GWJwgkuQ2Yp4HwEMCSuYrxv8ALAQR08pfU8A5pdFaZo2wNpkPWjRUp79QK2TJ1W8secJ2yxFBWtRn9Yz6jSzjHdHlDq7It4YBpkDZ4GWiJaOZlmtRAz7ODeLvhCLki4xYloDPQML4lP5GJiJaNjInBVRJjjXIGJAJPDOMXMBU/A/MQAgY4k4k3k8Sb6xu09/lJ/cpdT5mDQekGk5muZKnVUAVI7RqMB3R58IonAIIIqCKEGJosyYxNS5oONB8YJZbEztShUDtEjD+8RdOVksk1xjXHAz6OaTKn1aYa0FZTHFlHsn8y+YjQWadqPT2HP7X+jfHjGDm1ZQynVYUZDsbEfQxpNGW8TpQY3V6rjNWGNN4N4htOqlVNT/UTdQpLg2lmw5wWKmxWout/aXqvxGfAgg84PWPVwkpxUkcdrDwywjoQrHRYgb6VdsVmk7QCwAwXrH3jco5XnwgxMU02bdrHOrHgcPBQI5nil/l1YXbNGmhulkp9NzOlmJZx2bpk3gD1VPE/CGtcjA0OUVmimLa844zWJG5Bcg8L+cOl+e7CPLzbzj4OvGOEWyTLgSKEi+K+1zZakgVLG/VW835mtyjjC7WmbWuuPdAovA4nnAlnazOaEVYY+4o5xLeSsYNMYUk0FLzlGhsVmEpfznE7Nwiv0LIoOlbgnHMw80yNFSVa3Pt/wDCE3S3PaugrPAZs8AVMDaZACpebJXLpKn9Ksw8wImE981EU44WS5ky6Cpx+A2CCRIx5HYwZDo6OjqxKiB0SpUUOBgZMcZgAJOAFTwGMXQYMqH+Y8DSIloXkv1QTnf43/OGpFkd8LhtOfAC8x5ny3KbUEdjKUcyBFogWhqfoyYBULrcKfMxWs5B1WBU7GBB/vEyonHtBGyMumezhrCkV7XXQ6WhW1DOCA1BtFhjMBXK8ndnF+8yMmJrC4MwGeqSK8SL4n64wlshLNrCgJJJFbjeb6Ui0ot9FZRy8k7UspaCW+tS6gvp+oXQLR1o6OdT2Ztx3OBceYu5CIQK0yyykDHFTsYGoPiIulxhlscG10baKTFOTfhtxvMs/FeYjQdC2yMJo219IqkGmuopubEeDARv9H2npJaP3lBO45jxrHe8Iucq3XLtHI1te2WV7kOibZHQ5HR1zEVek5dJZv7RC/uND5VjKeks8iSwXFyJa/qNPhWNVpp70X3m8BqjzaMXp5qzpCbNeYf0gKvmx8I834rPdel8HS0cfSGkSqAKoJAAFw2XQ0LMdQ5McOX1iuZswaEYEfd43RciYFC67KCaYkCp3VjkY+DdN4K6bKZRVhQcREJKlmCjEkCPNKV6WjG4AFRkKi87ziOUOaAXrs59hbveNw+cMjBOST/yQ5NQ3FzNIWiLgooPmYA0yBM8DLQqy1yeRUa8BGeD6OmgTBXD4HL73wkWiBaCuxwmpr2LSgpJo1jRGsUdh0tqdWZeuTZrx2jflFwWBFQag4ER6Ku6Fsd0TmyrcHhki0RLQNngbPFZWpEqIUvFbp+06srUGMw6vLFz4Xc4bDRnrRN6ecSOwvVXffeRxN3ARnsue147HQry+Q2jrJrGpwy+p3bs4uDMC3CAA6ooOf3sgLTIxeYqo7YjWnN5Ydp8eGYGuYA/LhCjTICZ0J8+WRnlIV05ZBLYFey1bthGI4XiKpjFtpyZWWh/OR4qfpFKTFrEs5XuOpbceQIzGz7ESXGsRbtDeKcxePnB5czVvCBjlU4cBShMA0O9nWtakDYPlshV2BYhRQC4bTdUk+PlE3tNxZqjdif71gYck9gjw+sVWSCGjn1S6bG1l4Nf/UGjfejds6rpkGDDhMGsf5tePn80as1T3lK8wQR/qjU+jE7rKO8jLzRgw8phjpeGz23r7mTWwzXn4Nh6zujoXjo9KcYRtrFphrkgH7mP+2Mfpdv+cP5ZKj9zMflGxpWY/BP9R+cYvSp/5yfuEofyk/OPN66OZykdXSPpHoMQm1LEvUtga5bgMhuh3RVgmO6sFOqGBJNwuOW2L+2aElzG12JXbSgrvNYxV6eco5RpndCMsMyHM3CgFbgN2yL7RN0gnvTPJR9TFFaZilj0YolaLW8kD2jxx4Ui8shpZ5W8uf5qRRpxUvx/4TPlL8hS0Es0gud33cIUZ4vdEfwlfvCo4G8eOMRo9OrZ5l0hN9jhHjsNJsSr/b64/CBWnRsp8QwO0MwMHZ4Gzx15ThFYSWDGlJvOSntOhpi3y5gcd17jyYXeIhOzW+ZJbVII2y3wO3UOA5XRoDNgM/VcargMNhjFJwTzDhj05NYlyj2y29JvZNGGKnEfUbxEmaKO16JI60psLwCaEe631jrFpZtYS5ovNwJuYe8MCN4ikrHIlQx0O6YtZRNVe2/VXd3jyHmRAtGyAig+H1+XjthVpbTJzO2AOqu5RieZr5bIanTqXQmybQyMeAsybC7zoWmT4XedGfDY9RGZk+F3nQu82BF4vGBfBarJE5dStGF68aG48YojFpo2YQwhLSS0mzB+Y+d/zjTJZgmLg8SaE55pQ7GXzND5Ew4FhK1jqNwMWiJWET6Q4WeRUg5DLacoMEj21LQUqK1wBwptjwz6AALVjcKm6uZoMgL8YjDZGRXSSUCHY48wR84uvRhvxJYP+IR+6W/zURW6Tl/hj30/rEWGgxR0P/mleZYfONOil/Mj+ROo5rZvugEdBY6PXnBKph+NM92Wf6h8owenBS22jeJR/kI+Ubyaw6dt8pf5WP8AujD+lK0trHvyUP7WYfOOFrl6Zfn/ALOlpH61+CWiLdMSYgDkKWAKm8XmmBw5RotI+kMqW5l6rPTtatKCuRqbzSMYrUNRjE7RZ2lmjAg4331rfWucYK9RKEcI12URlLLJWtkLt0ddWtQCKUrlyi7s7f8ALyv1j+aKBpZABIpXDfTEjxi3sT1s4/LMI/coPyMIlypfgvJcL8hCwzwz4Rp1XVRVGAUAchSMiWi+0bbw6BCestw3jIxbST2qURGog3hjbPAmmQJ3gTTIpO4rGAVngbTIA82APOjO5tjlAa6WK7TNqwRQNfGpAOqu6uZ+sEeeFUu2A+wBvJuisstWYu+JNT8gNwp5Q+uLSyQ0sjFp6RQsxahqDXC4XDuG7wiMrSat2+qdvs8815+MeTLTfAnlq9+DbRnx2wxc9ltuBidLOMKPWIqsyXhhsxU8vpQwzKtstu2pU7R1l+oi2xE7mhakTWXFnJsav2GVuBBg5saoKzGCjeaeG2LKmRV3RF9H2enWNwF5OwDGKmY2uzP3mJ5ZeVIsLdbNcaiAiXmTcX5ZL8YXSVC7ppLaia087mI25Pwn90/CLQSqih2QrpGX1AvedF8XFfKsWgSMs5cIbkrmswQE1NN99OeJj1Q1x6NtowJ5isWEySDqk967iBBAsV38ckZK7SK1lje8v+tYesUuhT/OleRY/KBW5P4Y2zF8gW/0xYWaV+JJAzmk8llv8yI1aHm6C+4nUP8Als0lY6PejOyOj2ZwxG03TZbbQ6eIDD+iMp6ap+NZ5m0TJZ8A6/0tGw0vZyJev3GD8lPW/lrGa9MJetIZhjLZZg4Ket/KTHD8R9M8fJv0j5TKGRIZyFUVJ+79kbMSxqKrgMVA3ioGVYxktyL1ZhXusV+Bviys2lGWW2sxZh2K4km4DxjkKeFx2dC2DkeekEtjN1yOrqhV5VJrsvMQ0U10xNq6w4oa/DWhd7RNYUaYxGYotPhErLMKMrDI/wD0eEV388ltr2YJlof0IlZmtsB8x/aELYmqxAwxXgbxBNF20S5gY9kijcDn40iK1tnyRP1Q4Lm0TL4UmT4NbFqNZTVTgRFXMJisqpJlYNNBnnx5KqTAZcokx1utGoDLU9c9oj2RsH5j5Qyur3ZMpeyAW+frsEXsqf3NmeAw8YK/VXV8eMB0ZJqa5KPPL73Qd1qYc+skLvAsFgstIPLkQ1Ls8VUSXMhZ9hvEEn6JDCqY7Nv94Yl2eH7MlIdFJ8SESm08oyTWYYMt+8QSVZVGCgcov9OWddZWAvYGvEUv84RSVGK7NcnHJohNTjuAJKgySoOsuChIzuRZsqrQmtPlJ3Q0xvDVTxLN+2LAsoI1qgHO6ldhOUKaHXXMyf8A4jUT/LSoXxOs3OLMoKX4Z1wpvi0u0vgpkjMUEUy+zAulBbVQVp2jW4bt53ZRBXdr0Tq5ax1SfdFMONIJo6p1gVKkNWhFMb+BvrhEqL9yMoFOFZqDuqzc7lHxaLXQ6a1oT8kp2PF2VV8kaKkNWY7bKIP03nzYjlF56OkBpz0xYS1O6WKH+dnjpeFVZ1GfhGbVyxWaGOgHrA2R7HqjlE5iAgg4EEHgYyU1OqZbX6tZbb6XA81KnnGl9YO6KTSyETNbKYKfrQVXxWo/SI5nitLnTuXaNOlntnhmIsaFQZZxlsU5DsnmpENLLFRWJaTTVmrMycBG4+wfiPCDJLru2k4CPMt55XudpPgktiNcRTb/AGgLAazAYAgD9qm/mTB+nXBTWm8EwETiSdVK349kVF2OJ8Irl9B9wk1dZKZpUjeuJHLHxivLRaopF+BhC2yKGowPkfpF4y3L7guGQkWp0vRqbRiDxEMjSp9qWp4EjyIPxhCPQIcrJLgh1xfI3N0m5FFCoNq1LcicPCE1WJhIIsuKysb7JjBR6LLRUmkmveZjyBoPhBkkRZ2azgykK4U8DmPGsSSRGuUejGp9ikuzwzLkQykqChYhIo5gUlQZEiVImq5m4ZxeMcso5Fbpq95Y3Of6RCypE2mdI7TPZoFT3RnzJJ4UgoSOdq5KVrx+DRV6YAlSK7TDFitmQ9aZ2yPZlDtncT2Rx3Q9pG2LJTWYEnBVHadjgq74jofR7IGmTaGdMvcjAD2UXcB8zFaq/wColzDypSqAooABQDcLoFb7SJa7/lW8+FYNpGzAoSTQreDs2+MZqZNi7jtZeC3msCRC0zAiM59kV+ghPQy2hgGcgIRUAgFiMsOyPGB+kdpvWUPebl2R438of5eFliu5bUJ2eZqLrG8qCx3tjTmxA5xq9F2bo5SIcQOsdrG9j4kxn9BWPpZqKeyKTX4KaSl5tVv0RtOgG+O14TRsrc32zJrZ5ltXsLR0NerjfHR1jEKQK02XpVKVoTep2ML1PIgRZ6o2CIThQGkRJJrDJTxyYDSUnWUqwpWoYd1x2gOBoRxEKWB9dSrgFlNG37G5i+NHp+yYzPZagfcR2ZnDI7qbIys/WlvrgXrc47y/UYiPI6zSumxx9vY7ent8yGR+ZZgRcADkfvKJWSQVRQcaX8TefOGJLBlDKagioMBt0gkaysQRvIBGcYE8+ljsnlpmhNXazAcBWlfvfBpsgMKRRO5N5JPG+LfRzzXozABMqjrNwGQ4xeUNqygawV02QVND98I5ZcX06zBxRh9QdoitnWZpd7AsveUXj3gPiPKJU9wKXyBSVBklQWQAwqpBG0XwykuKOROQmjrY0u6mspxGfFd8Xch0mCqEHbtG4jERSrLj02cE1pftBIPiL4006vatsllGa2pSeV2XwlQlaNIIp1U/EbMLgPebAcMYQNlB7RdhsZ3I8CYPLlACgAA2CGS1kUvQv1Eqp+7Cf8RmZSRzmfRYFN6SZdMYavcSoB94m9uFwgwSJEACpuG+Ey1Nslj9idkUQVIX0jb0kqC1SSaIovZ2yVRnCr6WMwlLInStgZhukpxb2juWHdGaFEtjNmMZs4ihc5Duyx7CxarSuXMglMW0bo52f1i006SnUTFZKnIbX2tFyq1wgvRxhZ81pbOiOdWpFxNCI1TSrxwFcfMzyaqYiTwyBjRWAbVNKmlaV8MIWtvo5LZKSgEYYG862563njlCXozb5csMjnV1mqCcMAKHZhGsUA3jCHVQjOOSs3KuWCuRuhkKZl2pLANNoAFBtvujHmaZjs7mgvZzsAyHKgEPekek+lfo0vRTl7TbeAwEOejOiekfrDqS2BfY0wXqm8JifzU2RCr861Vx69y6flQc5ds0HoxYykoswo8w6zDuigCJwVaDjWLiFrQaG666Ba52mPRwioxUUcqTy8sfjoR1jtMexYga6QbREJrAggGphWCSO0PvKACDySQQVqDcQRiIx+mtFtLOrQ/+Mn2gPYP5ly2jhG+hLStmWYmowuPiDdQg5EbYzarTRvhh9jqbnXLKPm9gtnQtf/DJv/Ie8N20c4vbTILrRWoDiQK3bvrCOlNGsr6p7V5BGEwDMbH2rzEA0bbDJuNTL8SnDau6PKX0Srnh9nYU1OO6I1N0KKdQnW/Mahv9vKLGwySJaBheEUHcQBWGZRDAMpBBwIwMeWiyBxmCMCMR9Ruhe1vhlHMVtbEFaZGp35U+MMNMUUqwvIAGJJOQAhRwE7bKMq4AndWD2CUC7MbyANXYFONN5IN/CIgt0sEy4WSM/RKMdZao3eS6vvDBuYgBs9oTJJo3Ho28DVT4iLidcpMClWxKVY0+8oe4RziQpSljKKr1/V/iSZyfoLjxl1j0aZs+c0D3gy/1AReWSaJihwDQ4VzGR4HGDdGMwIYtHFlXczP/APHLN/jIeFT8BHo03LP8NJ0z3JUz4sAIvrPqsoZaEHC7lBwsMjoYFHaZwTbXM7FnWUO9OcE/sSv9UET0c177VNaf+TsSh+hcf1ExYaT0kJLSwwuYkE7Bth8uoGtUUpWtbqRorori8LspKUsZF3US5Z1VACqSFFwuGF0LWLS8p01tYLTEMcPrHmnNJ9EpUIzEjHVbUAO04Rj5cqsVus8uSwNqqU45ZtZc1bRLbUZlWpXWFATTHVrlfSKfSfo2suWXlljq3sGoermRQZRa+jM5OiEsXMuO+pqW8TFxSNKrjbDLEuyVcsIpNA6IliUjtLUuy6xJAJ614F+wEDlCXpJpilZEo34Owy/KN+2Cab07jKkHczjLcm/fFLY7ESyqq6zteqnCmbzDkg88BCrJ/wBqrsZCP9yw80ZYGZ1VbnYVBylpgZp390ZncI+gWGRLlS1lpQKo23naScyTeTCli0YsiXSus7GrucWNPIDADIQWOrpNKqI/cyX3OyX2DTxU3X3ZQPozsMMWbDnBY1iBPozsMdDsdAAr6udoj1ZerecoYgc/sn7zgAj6wN8eN18MtsLwey58oAAWvRomKUehHEggjAg5EbYyukdHmU1JhF56szBW2B+4+/AxuYStksMSrAEEUIN4IpnGXU6WF8cS7HVXSrfBjZEt5RJT9SHsnh3Tvi5sVsSZcOqwxRrmH1G8QO06NeXfKGun+GT1l/y2OI/K3IiE9RJlaXlcRerod4xU7489dRbpn61lfJvjOFq44Za2ewqpLYscWONNg2DhE5NhRW1lWhIpdUDwwiukW+YlzfiLyDj5N5RZ2TSEqZcrdbut1W8Djyh1Lrn9LFzU49lbpMzwDVRqbU/1A3+FYo588XgnHfSNrapGsjKMSpA40uhfReiVlJqkBmN7sQLz9BgBET0TnPOS8NQoxxglYp6vKDyxUUuApiPZij0j6RVVpYlsrYHWNCNt0aiTZ1W5VC1NTQAX7bozPpPZWmz1SVL1nC9YigoCbtZshD7q5qHp7KUyg5+roR0Rp7oVKFSwLVFDeK5AZ1Marpppla6yqOb9Rmoab6Cld0ZjR+j3s9qldKlxagbtLVgQKHI1oL6G+NvSJ0sJbcSI1MobsxPn2lbRNmP+MpUrgtKU+vGGfR+xLMnr0huUawB9oilBwGPIRfaX0U06cmSBes2ePZXeduUGXQEtWVpbOhUg46w/mqb+OcLjppq3d7Z9y8tRHy9vXBaUikXQwa0szKDLHWAN4ZmypsF55iLa1WuXLFZjheOJ4DExSWz0iJukrT8z/JfrGq6Vaw5+xmrU39JaTlkSOuVlpsIVQTuFBUxntJ6Wed1FBRDl7Te9TAbhCs4E/izn3aznyUfICLPRuh5k2+jSZe03TnG4f9Ib+1wjOpW6h7a1hfI1RhVzJ5ZW2SxszaktQzjtV7ErfMIxOxBec6CNXoqyS5CmlWdr3c01mPyGwC4Q3Z7IkqXqS1CqAbh5k7TvgMdXTaSFC47M1t0rGMM2vcON8R9XO0R1lxPCGY1iQCtq3HjdHvrA3wO048vrAoAGvWBsMdC0dAAX1g7o9WYWuOBgEEkdofeUABvVxviL9TDPbB4BasucAEfWDuiayw158oWhuz9kQAeerjfFdpCxpNoWWjDsutVccGHwwi2hAxDSawyU2uign6OnLkJw2rRJvMdh/wCWKueATqHtdxxqPyDY8qxtpPaEHtNmSYNWYiuNjAEecc27wuqbzHhmqvVzjw+TAppCdKuDsNz9YfzX+Bh2T6VuO3LVvdJXyNYt7Z6OSgPwmmS9wbWX9szWA5Uipn+jkzJpT8VeWfFCR/LGb+D1Vf0yyO8+if1LA3L9LpXtS5g4apHxrB19KbNtYfob5RSN6OTsehr7k5T5MogR0BO/7ed4yD/7BEf6tdxDZp31I0J9J7N3mP6G+kDf0rk5JMPJR8TFAuiZn/bz/wD8B/7IZk6HmnCzn9c1F/pDQZ1T6iQ4adf1D0z0pY9iUB7zfID5wpM0paJl2vTdLFPO8+cPSfRyccTITlMmnzKjyhpvR1QPxJ019wIlL4SwCeZiy0uqn9TwV8ymPSM68tVP4jAMcr2mH9IqxizsOjJ0y9EEte/OFW/TLU/1HlFzY7DLlCkuWqbaChPE4mLKzYc401eG1xeZ8sXPVSfCK+xaAlIdclpkzvuQSNyClEG4AQ4Z5F110Mwi+J4x0IxUVhGZtvsKJxN118E9XG+F5WI4w7FiADrq3jhfEfWDuidqw5wtAAwq6154XRL1cb46zYc4LAAL1cb49gsdAAhE5HaH3lHR0ADkAtWUdHQALw3Z+yPvOPI6AAsIGOjoAJye0Icjo6AAFqyheOjoAGrP2YLHR0ACLYx7KxEdHQAOwC1YDjHsdAAtDVmw5x0dAAWEXxPGPY6ADpeI4w7HR0AAbVhzhaOjoAGbNhzg0dHQAdHR0dAB/9k=');
+      background-size: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: rgba(0, 0, 0, 0.18);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--primary-glow), inset 0 0 15px var(--primary-glow);
+      cursor: pointer;
+      z-index: 1;
+      transition: transform 0.1s, box-shadow 0.2s, border-color 0.5s;
+      border: 3px solid var(--primary-glow);
+      outline: none;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .circle-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .circle-button:hover::before {
+      left: 100%;
+    }
+    
+    .circle-button:active {
+      transform: scale(0.92);
+      box-shadow: 0 0 35px var(--primary-glow), inset 0 0 25px var(--primary-glow);
+    }
+    
+    .menu-bar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 10;
+      border-top: 1px solid var(--border-color);
+      font-size: 14px;
+      box-shadow: 0 0 18px #0003;
+    }
+    
+    .menu-item {
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      user-select: none;
+      flex: 1;
+      padding: 8px 0;
+      border-radius: 8px;
+      position: relative;
+    }
+    
+    .menu-item.new::after {
+      content: "NEW";
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--primary-glow);
+      color: #000;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 5px;
+      border-radius: 3px;
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    .menu-item:hover {
+      color: var(--secondary-glow);
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 16, 0.75);
+      backdrop-filter: blur(7px);
+      z-index: 998;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      color: var(--text-color);
+      z-index: 999;
+      width: 95vw;
+      max-width: 500px;
+      animation: slideIn 0.4s ease-out;
+      max-height: 80vh;
+      overflow-y: auto;
+      backdrop-filter: blur(10px);
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .modal-header h2 {
+      margin: 0;
+      font-size: 24px;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 0 10px var(--primary-glow);
+      transition: text-shadow 0.5s;
+      background: linear-gradient(to right, var(--primary-glow), var(--secondary-glow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .close-button {
+      font-size: 28px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--text-color);
+      transition: transform 0.2s, color 0.2s;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    
+    .close-button:hover {
+      color: var(--primary-glow);
+      transform: rotate(90deg);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .modal-body button {
+      background: var(--button-bg);
+      margin-top: 15px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      color: var(--text-color);
+      font-family: 'Exo 2', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .modal-body button:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+    
+    .modal-body button:disabled {
+      background: #555;
+      cursor: not-allowed;
+      box-shadow: none;
+      opacity: 0.5;
+    }
+    
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--border-color);
+      font-size: 16px;
+    }
+    
+    .stat-item span:last-child {
+      color: var(--secondary-glow);
+      font-weight: bold;
+      transition: color 0.5s;
+    }
+    
+    .input-group {
+      margin-bottom: 15px;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-color);
+      font-family: 'Exo 2', sans-serif;
+      box-sizing: border-box;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--primary-glow);
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+    
+    .shop-item {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-left: 3px solid var(--secondary-glow);
+      transition: border-color 0.5s, transform 0.3s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .shop-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: 0.5s;
+    }
+    
+    .shop-item:hover::before {
+      left: 100%;
+    }
+    
+    .shop-item:hover {
+      transform: translateY(-5px);
+      border-left-color: var(--primary-glow);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .shop-item h4 {
+      margin: 0 0 8px 0;
+      color: var(--secondary-glow);
+      font-size: 18px;
+      transition: color 0.5s;
+    }
+    
+    .shop-item p {
+      margin: 0 0 15px 0;
+      font-size: 14px;
+      opacity: 0.8;
+      line-height: 1.5;
+    }
+    
+    .chat-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--background-start);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+    }
+    
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--background-start);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 0.5s;
+    }
+    
+    .loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .loader h2 {
+      color: var(--primary-glow);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px var(--primary-glow);
+    }
+    
+    .loader-bar {
+      width: 300px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    
+    .loader-progress {
+      height: 100%;
+      width: 0%;
+      background: var(--primary-glow);
+      border-radius: 5px;
+      transition: width 0.3s;
+    }
+    
+    .notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--glass-bg);
+      padding: 15px 30px;
+      border-radius: 10px;
+      z-index: 10001;
+      backdrop-filter: blur(5px);
+      border-left: 4px solid var(--primary-glow);
+      animation: slideDownAndFade 4s forwards;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      max-width: 90%;
+      text-align: center;
+    }
+    
+    @keyframes slideDownAndFade {
+      0% {
+        top: -100px;
+        opacity: 0;
+      }
+      20% {
+        top: 20px;
+        opacity: 1;
+      }
+      80% {
+        top: 20px;
+        opacity: 1;
+      }
+      100% {
+        top: -100px;
+        opacity: 0;
+      }
+    }
+    
+    /* --- ARVOHLAR (MOUSE KURSOR ANIMATSIYASI) --- */
+    .ghost {
+      pointer-events: none;
+      position: fixed;
+      z-index: 8888;
+      font-size: 42px;
+      opacity: 0.16;
+      transition: opacity 0.2s;
+      animation: ghostFade 4s linear infinite;
+      filter: blur(0.3px) drop-shadow(0 2px 12px #fff6);
+    }
+    
+    @keyframes ghostFade {
+      0% {
+        opacity: 0.16;
+      }
+      50% {
+        opacity: 0.27;
+      }
+      100% {
+        opacity: 0.16;
+      }
+    }
+    
+    /* --- Yangi effektlar --- */
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(255, 0, 255, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 255, 0);
+      }
+    }
+    
+    .achievement {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      background: var(--card-bg);
+      border-left: 4px solid var(--secondary-glow);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transform: translateX(120%);
+      transition: transform 0.5s;
+      z-index: 1000;
+      max-width: 300px;
+    }
+    
+    .achievement.show {
+      transform: translateX(0);
+    }
+    
+    .achievement h3 {
+      margin: 0 0 5px 0;
+      color: var(--secondary-glow);
+    }
+    
+    .achievement p {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+    
+    /* --- Clock --- */
+    .clock-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--glass-bg);
+      border: 2px solid var(--border-color);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      backdrop-filter: blur(5px);
+    }
+    
+    .clock {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      text-align: center;
+      color: var(--text-color);
+    }
+    
+    .date {
+      font-size: 10px;
+      opacity: 0.8;
+    }
+    
+    /* --- Chat Styles --- */
+    .chat-message {
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      position: relative;
+      animation: fadeIn 0.3s;
+    }
+    
+    .chat-message.own {
+      background: rgba(106, 17, 203, 0.3);
+      margin-left: 20%;
+      text-align: right;
+    }
+    
+    .chat-message.other {
+      background: rgba(0, 0, 0, 0.2);
+      margin-right: 20%;
+    }
+    
+    .chat-user {
+      font-weight: bold;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .chat-text {
+      word-wrap: break-word;
+    }
+    
+    .chat-input-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .chat-input {
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--text-color);
+      font-family: 'Exo 2', sans-serif;
+    }
+    
+    .chat-send-btn {
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: none;
+      background: var(--button-bg);
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .chat-send-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+    
+    /* --- Secret Panel Styles --- */
+    .secret-panel {
+      background: linear-gradient(135deg, var(--dark-blood), #1a0000);
+      border: 3px solid var(--blood-red);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 0 30px rgba(139, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+      font-family: 'Eater', cursive;
+      color: #ff9e9e;
+      text-align: center;
+    }
+    
+    .secret-panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, transparent, var(--blood-red), transparent);
+      animation: bloodFlow 3s linear infinite;
+    }
+    
+    @keyframes bloodFlow {
+      0% { background-position: -100% 0; }
+      100% { background-position: 100% 0; }
+    }
+    
+    .secret-panel h2 {
+      color: #ff5252;
+      text-shadow: 0 0 10px rgba(255, 82, 82, 0.7);
+      margin-bottom: 25px;
+      font-size: 28px;
+      letter-spacing: 2px;
+    }
+    
+    .secret-question {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--blood-red);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    
+    .secret-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 25px;
+    }
+    
+    .secret-btn {
+      padding: 15px 30px;
+      font-size: 18px;
+      font-family: 'Eater', cursive;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: linear-gradient(45deg, var(--blood-red), #ff5252);
+      color: white;
+      box-shadow: 0 5px 15px rgba(139, 0, 0, 0.5);
+    }
+    
+    .secret-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(139, 0, 0, 0.7);
+    }
+    
+    .secret-btn:active {
+      transform: translateY(1px);
+    }
+    
+    .blood-drip {
+      position: absolute;
+      width: 3px;
+      height: 20px;
+      background: var(--blood-red);
+      border-radius: 0 0 5px 5px;
+      animation: drip linear infinite;
+    }
+    
+    @keyframes drip {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+    
+    /* --- Cosmic Portal --- */
+    .cosmic-portal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--cosmic-purple), transparent 70%);
+      box-shadow: 0 0 50px var(--cosmic-purple);
+      z-index: 10000;
+      display: none;
+      animation: portalPulse 2s infinite;
+    }
+    
+    @keyframes portalPulse {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.1); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+    
+    /* --- Power-ups --- */
+    .power-up {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--lava-orange);
+      box-shadow: 0 0 20px var(--lava-orange);
+      cursor: pointer;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      animation: float 3s infinite ease-in-out;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    /* --- Galaxy Background --- */
+    .galaxy-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="10" cy="10" r="1" fill="white" opacity="0.7"/><circle cx="30" cy="40" r="0.5" fill="white" opacity="0.5"/><circle cx="70" cy="20" r="0.8" fill="white" opacity="0.6"/><circle cx="50" cy="80" r="0.6" fill="white" opacity="0.4"/></svg>');
+      background-size: 200px 200px;
+      opacity: 0.3;
+      z-index: -2;
+      animation: galaxyMove 30s linear infinite;
+    }
+    
+    @keyframes galaxyMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 200px 200px; }
+    }
+    
+    /* --- Responsive design --- */
+    @media (max-width: 600px) {
+      body {
+        justify-content: space-between;
+        padding-top: 5vh;
+        padding-bottom: 15vh;
+      }
+      
+      .main-content {
+        justify-content: center;
+        flex-grow: 1;
+      }
+      
+      #score {
+        display: none;
+      }
+      
+      #scoreBottom {
+        display: block;
+      }
+      
+      .circle-button {
+        width: 140px;
+        height: 140px;
+      }
+      
+      .menu-bar {
+        padding: 10px 0;
+        font-size: 10px;
+      }
+      
+      .menu-item span {
+        font-size: 20px;
+      }
+      
+      .modal-content {
+        padding: 20px;
+      }
+      
+      .stat-item {
+        font-size: 14px;
+      }
+      
+      .clock-container {
+        width: 60px;
+        height: 60px;
+        top: 10px;
+        right: 10px;
+      }
+      
+      .clock {
+        font-size: 10px;
+      }
+      
+      .date {
+        font-size: 8px;
+      }
+      
+      .secret-buttons {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .secret-btn {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      .circle-button {
+        width: 120px;
+        height: 120px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+    }
+    
+    /* --- Yangi stil klasslari --- */
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+    
+    .badge-new {
+      background: var(--primary-glow);
+      color: #000;
+    }
+    
+    .badge-updated {
+      background: var(--secondary-glow);
+      color: #000;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 20px;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--primary-glow);
+      text-shadow: 0 0 5px var(--primary-glow);
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .feature-list li {
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+    
+    .feature-list li:before {
+      content: "✓ ";
+      color: var(--secondary-glow);
+      font-weight: bold;
+    }
+    
+    /* --- 3D Button Styles --- */
+    .coin-button {
+      width: 100px;
+      height: 100px;
+      margin: 15px;
+      border: none;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #6a11cb, #2575fc);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: top;
+    }
+    
+    .coin-button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+    }
+    
+    .coin-button:active {
+      transform: translateY(2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .coin-button::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+      transform: rotate(30deg);
+      transition: all 0.5s ease;
+    }
+    
+    .coin-button:hover::before {
+      transform: rotate(30deg) translate(20%, 20%);
+    }
+    
+    .coin-button.fire {
+      background: linear-gradient(145deg, #ff416c, #ff4b2b);
+    }
+    
+    .coin-button.water {
+      background: linear-gradient(145deg, #2193b0, #6dd5ed);
+    }
+    
+    .coin-button.earth {
+      background: linear-gradient(145deg, #834d9b, #d04ed6);
+    }
+    
+    .coin-button.air {
+      background: linear-gradient(145deg, #00b09b, #96c93d);
+    }
+    
+    .coin-button.cosmic {
+      background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
+    }
+    
+    .coin-button.rainbow {
+      background: linear-gradient(145deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff);
+      background-size: 1400% 1400%;
+      animation: rainbow 3s ease infinite;
+    }
+    
+    @keyframes rainbow {
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+    }
+    
+    .button-label {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    /* --- Price badge --- */
+    .price-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .coin-icon {
+      color: gold;
+    }
+    
+    /* --- New Menu Items --- */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .menu-card {
+      background: var(--glass-bg);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(10px);
+    }
+    
+    .menu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      border-color: var(--primary-glow);
+    }
+    
+    .menu-card i {
+      font-size: 36px;
+      margin-bottom: 15px;
+      color: var(--primary-glow);
+    }
+    
+    .menu-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+    
+    .menu-card p {
+      font-size: 14px;
+      opacity: 0.8;
+      margin: 0;
+    }
+  </style>
+</head>
+<body data-theme="neon-fury">
+  <div id="loader">
+    <h2>clicker coin</h2>
+    <p>Ultimate Edition 7.0</p>
+    <div class="loader-bar">
+      <div class="loader-progress" id="loaderProgress"></div>
+    </div>
+    <p style="margin-top: 15px; font-size: 14px;">24.07.2025 yangilandi</p>
+  </div>
+  
+  <!-- Clock -->
+  <div class="clock-container">
+    <div class="clock">
+      <div id="time">00:00:00</div>
+      <div class="date" id="date">01.01.2025</div>
+    </div>
+  </div>
+  
+  <!-- LOGIN MODAL -->
+  <div id="entryModal" class="modal-overlay" style="display: flex;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-shield-alt"></i> Kirish</h2>
+      </div>
+      <div class="modal-body" id="entryChoices">
+        <button onclick="enterAsUser()"><i class="fas fa-user"></i> Oddiy O'yinchi</button>
+        <button onclick="showOwnerLogin()"><i class="fas fa-crown"></i> Sayt Egasi (Owner)</button>
+      </div>
+      <div class="modal-body" id="ownerLoginForm" style="display:none;">
+        <div class="input-group">
+          <label for="ownerPass">Owner Paroli:</label>
+          <input id="ownerPass" type="password" placeholder="Parolni kiriting">
+        </div>
+        <button onclick="checkOwnerPass()"><i class="fas fa-sign-in-alt"></i> Kirish</button>
+        <button onclick="backToEntry()" style="background: rgba(255,255,255,0.1);"><i class="fas fa-arrow-left"></i> Ortga</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="background-container" id="bgContainer">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+  </div>
+  
+  <div class="galaxy-bg"></div>
+  
+  <div id="scoreBottom">Ochko: 0</div>
+  
+  <div class="main-content">
+    <h1 id="mainTitle">clicker coin</h1>
+    <div id="score">Ochko: 0</div>
+    <div class="circle-button pulse" id="mainBtn"></div>
+  </div>
+  
+  <div class="menu-bar" id="menuBar">
+    <div class="menu-item" onclick="openModal('profilModal')">
+      <i class="fas fa-user"></i>
+      <span>Profil</span>
+    </div>
+    <div class="menu-item new" onclick="openModal('shopModal')">
+      <i class="fas fa-shopping-cart"></i>
+      <span>Do'kon</span>
+    </div>
+    <div class="menu-item" onclick="openModal('statistikaModal')">
+      <i class="fas fa-chart-bar"></i>
+      <span>Statistika</span>
+    </div>
+    <div class="menu-item new" onclick="openModal('missionsModal')">
+      <i class="fas fa-tasks"></i>
+      <span>Vazifalar</span>
+    </div>
+    <div class="menu-item" onclick="openModal('chatModal')">
+      <i class="fas fa-comments"></i>
+      <span>Chat</span>
+    </div>
+    <div class="menu-item new" onclick="openModal('achievementsModal')">
+      <i class="fas fa-trophy"></i>
+      <span>Yutuqlar</span>
+    </div>
+    <div class="menu-item" onclick="openModal('sozlamalarModal')">
+      <i class="fas fa-cog"></i>
+      <span>Sozlamalar</span>
+    </div>
+    <div class="menu-item new" onclick="openModal('buttonsModal')">
+      <i class="fas fa-gamepad"></i>
+      <span>Tugmalar</span>
+    </div>
+    <div class="menu-item" style="display:none;" id="adminMenu" onclick="openOwnerPanel()">
+      <i class="fas fa-crown"></i>
+      <span>Admin</span>
+    </div>
+  </div>
+  
+  <!-- Modallar -->
+  <div id="profilModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-user"></i> Profil</h2>
+        <span class="close-button" onclick="closeAllModals()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="stat-item">
+          <span><i class="fas fa-user-tag"></i> Login:</span> 
+          <span id="profileName">Mehmon</span>
+        </div>
+        <div class="stat-item">
+          <span><i class="fas fa-award"></i> Unvon:</span> 
+          <span id="profileRank">O'yinchi</span>
+        </div>
+        <div class="stat-item">
+          <span><i class="fas fa-level-up-alt"></i> Daraja:</span> 
+          <span id="profileLevel">1</span>
+        </div>
+        <div class="stat-item">
+          <span><i class="fas fa-coins"></i> Balans:</span> 
+          <span id="profileBalance">0</span>
+        </div>
+        <hr>
+        <div class="input-group">
+          <label for="changeNameInput"><i class="fas fa-edit"></i> Ismni o'zgartirish:</label>
+          <input type="text" id="changeNameInput" placeholder="Yangi ism...">
+        </div>
+        <button onclick="changePlayerName()"><i class="fas fa-save"></i> Saqlash</button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="shopModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:650px;">
+      <div class="modal-header">
+        <h2><i class="fas fa-shopping-cart"></i> Do'kon <span class="badge badge-new">NEW</span></h2>
+        <span class="close-button" onclick="closeAllModals()">&times;</span>
+      </div>
+      <div class="modal-body" id="shopItemsContainer"
+        style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:16px;"></div>
+    </div>
+  </div>
+  
+  <div id="statistikaModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-chart-bar"></i> Statistika</h2>
+        <span class="close-button" onclick="closeAllModals()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="stat-item">
+          <span><i class="fas fa-mouse-pointer"></i> Jami bosishlar:</span> 
+          <span id="totalClicksStat">0</span>
+        </div>
+        <div class="stat-item">
+          <span><i class="fas fa-coins"></i> Joriy ochko:</span> 
+          <span id="currentScoreStat">0</span>
+        </div>
+        <div class="stat-item">
+          <span><i class="fas fa-bolt"></i> Bosish kuchi:</span> 
+          <span id="clickPowerStat">1</span>
+        </div>
+        <div class="stat-item">
+          <span><i class="fas fa-robot"></i> Avto-daromad (sek):</span> 
+          <span id="incomePerSecondStat">0</span>
+        </div>
+        <div class="stat-item">
+          <span><i class="fas fa-clock"></i> Oflayn daromad:</span> 
+          <span id="offlineIncomeStat">Yo'q</span>
+        </div>
+        <div class="stat-item">
+          <span><i class="fas fa-trophy"></i> Yutuqlar:</span> 
+          <span id="achievementsStat">0/20</span>
+        </div>
+        <div class="stat-item">
+          <span><i class="fas fa-battery-full"></i> Energiya:</span> 
+          <span id="energyStat">100%</span>
+        </div>
+        <div class="stat-item">
+          <span><i class="fas fa-shield-alt"></i> Himoya:</span> 
+          <span id="defenseStat">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="missionsModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-tasks"></i> Vazifalar <span class="badge badge-new">NEW</span></h2>
+        <span class="close-button" onclick="closeAllModals()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <h3 class="section-title">Faol Vazifalar</h3>
+        <div class="shop-item">
+          <h4><i class="fas fa-bolt"></i> Tezlik Rekordi</h4>
+          <p>10 soniya ichida 50 marta bosing</p>
+          <div class="stat-item">
+            <span>Holati:</span>
+            <span id="mission1Status">Bajarilmagan</span>
+          </div>
+          <button onclick="startMission(1)">Boshlash</button>
+        </div>
+        <div class="shop-item">
+          <h4><i class="fas fa-coins"></i> Boy O'yinchi</h4>
+          <p>100,000 ochkoga erishing</p>
+          <div class="stat-item">
+            <span>Holati:</span>
+            <span id="mission2Status">Bajarilmagan</span>
+          </div>
+          <button onclick="checkMission(2)">Tekshirish</button>
+        </div>
+        <div class="shop-item">
+          <h4><i class="fas fa-shopping-cart"></i> Sotuvchi</h4>
+          <p>Do'kondan 5 narsa sotib oling</p>
+          <div class="stat-item">
+            <span>Holati:</span>
+            <span id="mission3Status">Bajarilmagan</span>
+          </div>
+          <button onclick="checkMission(3)">Tekshirish</button>
+        </div>
+        <div class="shop-item">
+          <h4><i class="fas fa-robot"></i> Avtomat</h4>
+          <p>Avto-kliker 1000 ochko berishini kutib turing</p>
+          <div class="stat-item">
+            <span>Holati:</span>
+            <span id="mission4Status">Bajarilmagan</span>
+          </div>
+          <button onclick="checkMission(4)">Tekshirish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="achievementsModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-trophy"></i> Yutuqlar <span class="badge badge-new">NEW</span></h2>
+        <span class="close-button" onclick="closeAllModals()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <h3 class="section-title">Sizning Yutuqlaringiz</h3>
+        <div id="achievementsList">
+          <!-- Yutuqlar dinamik ravishda yuklanadi -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="sozlamalarModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-cog"></i> Sozlamalar</h2>
+        <span class="close-button" onclick="closeAllModals()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <h4><i class="fas fa-palette"></i> Dizayn Temalari</h4>
+        <p>O'yin ko'rinishini o'zgartiring:</p>
+        <button onclick="changeTheme('neon-fury')"><i class="fas fa-fire"></i> Neon Fury</button>
+        <button onclick="changeTheme('cyber-blue')"><i class="fas fa-water"></i> Cyber Blue</button>
+        <button onclick="changeTheme('golden-empire')"><i class="fas fa-crown"></i> Golden Empire</button>
+        <button onclick="changeTheme('neon-ninja')"><i class="fas fa-user-ninja"></i> Neon Ninja</button>
+        <button onclick="changeTheme('rainbow-delight')"><i class="fas fa-rainbow"></i> Rainbow Delight</button>
+        <button onclick="changeTheme('cosmic-void')"><i class="fas fa-star"></i> Cosmic Void</button>
+        <button onclick="changeTheme('lava-flow')"><i class="fas fa-fire-alt"></i> Lava Flow</button>
+        <hr>
+        <h4><i class="fas fa-volume-up"></i> Ovoz Sozlamalari</h4>
+        <button onclick="toggleSound()"><i class="fas fa-volume-mute"></i> Ovozni Yoqish/O'chirish</button>
+        <hr>
+        <h4><i class="fas fa-sync-alt"></i> Qo'shimcha</h4>
+        <button onclick="toggleAutoClicker()"><i class="fas fa-robot"></i> Avto-klikkerni Yoqish/O'chirish</button>
+        <hr>
+        <button onclick="resetGame()" style="background: linear-gradient(to right, #ff416c, #ff4b2b);">
+          <i class="fas fa-redo"></i> O'yinni Qayta Boshlash
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="buttonsModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-gamepad"></i> Maxsus Tugmalar <span class="badge badge-new">NEW</span></h2>
+        <span class="close-button" onclick="closeAllModals()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <h3 class="section-title">3D Effektlar bilan Tugmalar</h3>
+        <p>Quyidagi tugmalarni bosib, maxsus effektlarni kuzating:</p>
+        
+        <div style="text-align: center;">
+          <button class="coin-button fire" onclick="activateButtonEffect('fire')">
+            <div class="button-label">Olov</div>
+          </button>
+          <button class="coin-button water" onclick="activateButtonEffect('water')">
+            <div class="button-label">Suv</div>
+          </button>
+          <button class="coin-button earth" onclick="activateButtonEffect('earth')">
+            <div class="button-label">Yer</div>
+          </button>
+          <button class="coin-button air" onclick="activateButtonEffect('air')">
+            <div class="button-label">Havo</div>
+          </button>
+          <button class="coin-button cosmic" onclick="activateButtonEffect('cosmic')">
+            <div class="button-label">Kosmik</div>
+          </button>
+          <button class="coin-button rainbow" onclick="activateButtonEffect('rainbow')">
+            <div class="button-label">Rainbow</div>
+          </button>
+        </div>
+        
+        <div id="buttonEffectDescription" style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px; min-height: 80px;">
+          <p>Tugma bosish orqali effektlarni kuzating...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="chatModal" class="chat-container" style="display:none; background:var(--background-start);">
+    <div style="padding:20px; flex-grow: 1; display: flex; flex-direction: column;">
+      <h2 style="color:var(--primary-glow);margin:0;"><i class="fas fa-comments"></i> Chat</h2>
+      <div id="chatMessages"
+        style="flex-grow: 1; overflow:auto;background:rgba(0,0,0,0.2);margin:10px 0 18px 0;padding:8px;border-radius:8px;">
+      </div>
+      <div class="chat-input-container">
+        <input id="chatInput" class="chat-input" placeholder="Xabar yozing...">
+        <button id="chatSendBtn" class="chat-send-btn"><i class="fas fa-paper-plane"></i></button>
+        <button onclick="closeAllModals()" class="chat-send-btn" style="background: rgba(255,255,255,0.1);"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- SECRET PANEL MODAL -->
+  <div id="secretPanelModal" class="modal-overlay" style="display:none;">
+    <div class="secret-panel">
+      <h2>QONLI SIRLAR</h2>
+      <div class="secret-question" id="secretQuestion">
+        Siz bu tugmani taxmin qildingizmi yoki bilardingiz?
+      </div>
+      <div class="secret-buttons">
+        <button class="secret-btn" onclick="secretAnswer('taxmin')">TAXMIN QILGANMAN</button>
+        <button class="secret-btn" onclick="secretAnswer('bilsam')">BILARDIM</button>
+      </div>
+      <div id="secretMessage" style="margin-top: 20px; min-height: 60px;"></div>
+    </div>
+  </div>
+  
+  <!-- Owner panel (Ctrl+Alt+F) -->
+  <div id="ownerPanelModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content" style="max-width:460px;">
+      <div class="modal-header">
+        <h2><i class="fas fa-crown"></i> Owner/Admin Panel</h2>
+        <span class="close-button" onclick="closeOwnerPanel()">&times;</span>
+      </div>
+      <div class="modal-body" id="ownerPanelBody"></div>
+    </div>
+  </div>
+  
+  <!-- Achievement notification -->
+  <div class="achievement" id="achievement">
+    <h3>Yutuqga erishdingiz!</h3>
+    <p>100 ta bosish</p>
+  </div>
+  
+  <!-- Cosmic Portal -->
+  <div class="cosmic-portal" id="cosmicPortal"></div>
+  
+  <script>
+    // --- GLOBAL STATE & STORAGE ---
+    let gameState = {};
+    const defaultState = {
+      ochko: 0, 
+      totalClicks: 0, 
+      clickMultiplier: 1,
+      profile: { 
+        name: "Mehmon", 
+        rank: "O'yinchi", 
+        level: 1, 
+        theme: "neon-fury",
+        balance: 0,
+        energy: 100,
+        defense: 0
+      },
+      ownedItems: [], 
+      stats: { 
+        ochkoPerSecond: 0, 
+        lastLogin: Date.now() 
+      },
+      chat: [],
+      users: [{ name: "OWNER", rank: "Owner", level: "inf" }],
+      achievements: [],
+      missions: {
+        mission1: { status: "pending", startTime: 0, clicks: 0 },
+        mission2: { status: "pending" },
+        mission3: { status: "pending", itemsBought: 0 },
+        mission4: { status: "pending", autoClicks: 0 }
+      },
+      secret: {
+        attempts: 0,
+        bannedUntil: 0
+      },
+      settings: {
+        autoClickerEnabled: true,
+        soundEnabled: true
+      }
+    };
+    
+    function saveState() { 
+      gameState.stats.lastLogin = Date.now(); 
+      localStorage.setItem('coinKombatState_v7', JSON.stringify(gameState)); 
+    }
+    
+    function loadState() {
+      const saved = localStorage.getItem('coinKombatState_v7');
+      gameState = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultState));
+      if (!gameState.stats) gameState.stats = defaultState.stats;
+      if (!gameState.profile.theme) gameState.profile.theme = defaultState.profile.theme;
+      if (!gameState.chat) gameState.chat = [];
+      if (!gameState.users) gameState.users = [{ name: "OWNER", rank: "Owner", level: "inf" }];
+      if (!gameState.achievements) gameState.achievements = [];
+      if (!gameState.missions) gameState.missions = defaultState.missions;
+      if (!gameState.profile.balance) gameState.profile.balance = 0;
+      if (!gameState.secret) gameState.secret = defaultState.secret;
+      if (!gameState.settings) gameState.settings = defaultState.settings;
+      if (!gameState.profile.energy) gameState.profile.energy = 100;
+      if (!gameState.profile.defense) gameState.profile.defense = 0;
+    }
+    
+    // --- CLOCK ---
+    function updateClock() {
+      const now = new Date();
+      const timeElement = document.getElementById('time');
+      const dateElement = document.getElementById('date');
+      
+      timeElement.textContent = now.toLocaleTimeString('uz-UZ', {hour12: false});
+      dateElement.textContent = now.toLocaleDateString('uz-UZ');
+    }
+    
+    setInterval(updateClock, 1000);
+    updateClock(); // Initial call
+    
+    // --- LOGIN MODAL LOGIC ---
+    function lockGameUI(lock = true) {
+      document.querySelector('.main-content').style.pointerEvents = lock ? "none" : "auto";
+      document.querySelector('.main-content').style.opacity = lock ? "0.3" : "1";
+      document.getElementById('menuBar').style.pointerEvents = lock ? "none" : "auto";
+    }
+    
+    function showLogin() {
+      document.getElementById('entryModal').style.display = 'flex';
+      lockGameUI(true);
+    }
+    
+    function hideLogin() {
+      document.getElementById('entryModal').style.display = 'none';
+      lockGameUI(false);
+    }
+    
+    function enterAsUser() {
+      gameState.profile.rank = "O'yinchi";
+      gameState.profile.name = prompt("Login (ismingiz):", "Player") || "Player";
+      if (!gameState.users.some(u => u.name === gameState.profile.name))
+        gameState.users.push({ name: gameState.profile.name, rank: "O'yinchi", level: gameState.profile.level });
+      hideLogin();
+      updateAllUI();
+      saveState();
+      showAchievement("Yangi o'yinchi", "clicker coinga xush kelibsiz!");
+    }
+    
+    function showOwnerLogin() {
+      document.getElementById('entryChoices').style.display = 'none';
+      document.getElementById('ownerLoginForm').style.display = 'block';
+    }
+    
+    function backToEntry() {
+      document.getElementById('entryChoices').style.display = 'block';
+      document.getElementById('ownerLoginForm').style.display = 'none';
+      document.getElementById('ownerPass').value = '';
+    }
+    
+    function checkOwnerPass() {
+      const pass = document.getElementById('ownerPass').value;
+      // Yangi parol: 201020182033
+      if (pass === "201020182033") {
+        gameState.profile.rank = "Owner";
+        gameState.profile.name = "OWNER";
+        gameState.profile.level = "inf";
+        gameState.ochko = 999999999999; // Cheksiz ochko
+        gameState.clickMultiplier = 10000; // Kuchli bosish
+        gameState.stats.ochkoPerSecond = 100000; // Avto-daromad
+        gameState.profile.energy = 1000;
+        gameState.profile.defense = 1000;
+        if (!gameState.users.some(u => u.name === "OWNER"))
+          gameState.users.push({ name: "OWNER", rank: "Owner", level: "inf" });
+        hideLogin();
+        updateAllUI();
+        showNotification("Sayt egasi sifatida kirdingiz! Barcha imkoniyatlar ochiq!");
+        saveState();
+      } else {
+        showNotification('Xato parol!');
+      }
+    }
+    
+    // --- INIT ---
+    window.onload = function () {
+      // Loader animation
+      const loaderProgress = document.getElementById('loaderProgress');
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 5;
+        loaderProgress.style.width = `${progress}%`;
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            document.getElementById('loader').classList.add('hidden');
+          }, 300);
+        }
+      }, 50);
+      
+      loadState();
+      changeTheme(gameState.profile.theme, false);
+      updateAllUI();
+      
+      // Auto income
+      setInterval(() => {
+        if (gameState.stats.ochkoPerSecond > 0 && gameState.settings.autoClickerEnabled) {
+          gameState.ochko += gameState.stats.ochkoPerSecond;
+          updateScoreUI();
+          saveState();
+        }
+      }, 1000);
+      
+      // Energy regeneration
+      setInterval(() => {
+        if (gameState.profile.energy < 100) {
+          gameState.profile.energy = Math.min(100, gameState.profile.energy + 1);
+          updateEnergyUI();
+        }
+      }, 5000);
+      
+      showLogin();
+      renderShop();
+      renderChat();
+      renderAchievements();
+      
+      // Check achievements
+      checkAchievements();
+      
+      // Check if user is banned
+      checkBanStatus();
+      
+      // Create random power-ups
+      createRandomPowerUps();
+    };
+    
+    window.onbeforeunload = saveState;
+    
+    // --- BAN SYSTEM ---
+    function checkBanStatus() {
+      const now = Date.now();
+      if (gameState.secret.bannedUntil > now) {
+        const remaining = Math.ceil((gameState.secret.bannedUntil - now) / (1000 * 60 * 60 * 24));
+        showNotification(`Siz 1 kunlik ban oldingiz! ${remaining} kun qolgan.`);
+        lockGameUI(true);
+      }
+    }
+    
+    // --- SECRET PANEL LOGIC ---
+    let secretQuestionCount = 0;
+    
+    function openSecretPanel() {
+      // Check if user is banned
+      const now = Date.now();
+      if (gameState.secret.bannedUntil > now) {
+        showNotification("Sizga kirish taqiqlangan! Ban vaqti tugamagan.");
+        return;
+      }
+      
+      document.getElementById('secretPanelModal').style.display = 'flex';
+      secretQuestionCount = 0;
+      document.getElementById('secretMessage').innerHTML = "";
+      document.getElementById('secretQuestion').innerText = "Siz bu tugmani taxmin qildingizmi yoki bilardingiz?";
+    }
+    
+    function secretAnswer(answer) {
+      const messageElement = document.getElementById('secretMessage');
+      
+      if (answer === 'taxmin') {
+        // Ban user for 1 day
+        gameState.secret.bannedUntil = Date.now() + (24 * 60 * 60 * 1000); // 1 kun
+        saveState();
+        messageElement.innerHTML = "<p style='color:#ff5252;font-size:18px;'>SIZGA 1 KUNLIK BAN BERILDI!</p><p>Saytga kirish taqiqlandi.</p>";
+        showNotification("Sizga 1 kunlik ban berildi!");
+        lockGameUI(true);
+        setTimeout(() => {
+          document.getElementById('secretPanelModal').style.display = 'none';
+        }, 3000);
+      } else if (answer === 'bilsam') {
+        secretQuestionCount++;
+        if (secretQuestionCount < 3) {
+          document.getElementById('secretQuestion').innerText = 
+            `Siz haqiqatdan ham buni bilsangiz, yana ${3 - secretQuestionCount} marta tasdiqlang. Haqiqatan ham bilardingizmi?`;
+        } else {
+          // Grant ultimate access
+          messageElement.innerHTML = "<p style='color:#4caf50;font-size:20px;'>TABRIKLAYMIZ!</p><p>Siz sayt qirolisiz! Barcha imkoniyatlar endi sizniki.</p>";
+          showNotification("Tabriklaymiz! Siz sayt qirolisiz!");
+          
+          // Grant ultimate rank
+          gameState.profile.rank = "Sayt Qirol";
+          gameState.profile.level = "∞";
+          gameState.ochko = 999999999999999;
+          gameState.clickMultiplier = 100000;
+          gameState.stats.ochkoPerSecond = 1000000;
+          gameState.profile.energy = 10000;
+          gameState.profile.defense = 10000;
+          updateAllUI();
+          saveState();
+        }
+      }
+    }
+    
+    // --- UI & THEMES ---
+    const scoreEl = document.getElementById("score");
+    const scoreBottom = document.getElementById("scoreBottom");
+    
+    function updateScoreUI() {
+      const formattedScore = Math.floor(gameState.ochko).toLocaleString('en-US');
+      scoreEl.innerText = "Ochko: " + formattedScore;
+      scoreBottom.innerText = "Ochko: " + formattedScore;
+    }
+    
+    function updateEnergyUI() {
+      document.getElementById('energyStat').innerText = gameState.profile.energy + "%";
+    }
+    
+    function updateAllUI() {
+      updateScoreUI();
+      updateEnergyUI();
+      const oldLevel = gameState.profile.level;
+      if (gameState.profile.rank !== "Owner" && gameState.profile.rank !== "Sayt Qirol") gameState.profile.level = Math.floor(gameState.totalClicks / 100) + 1;
+      
+      // Daraja oshganda tabriklaymiz
+      if (gameState.profile.level > oldLevel && gameState.profile.rank !== "Sayt Qirol") {
+        showNotification(`Tabriklaymiz! Sizning darajangiz ${gameState.profile.level} ga oshdi!`);
+      }
+      
+      document.getElementById('profileName').innerText = gameState.profile.name;
+      document.getElementById('profileRank').innerText = gameState.profile.rank;
+      document.getElementById('profileLevel').innerText = gameState.profile.level;
+      document.getElementById('profileBalance').innerText = gameState.profile.balance;
+      document.getElementById('profileDefense').innerText = gameState.profile.defense;
+      document.getElementById('mainTitle').innerText = gameState.profile.name + " Kombat";
+      document.getElementById('adminMenu').style.display =
+        (gameState.profile.rank === 'Owner' || gameState.profile.rank === 'Admin' || gameState.profile.rank === 'Sayt Qirol') ? 'flex' : 'none';
+      
+      // Statistikani yangilash
+      document.getElementById('achievementsStat').innerText = `${gameState.achievements.length}/20`;
+      document.getElementById('defenseStat').innerText = gameState.profile.defense;
+    }
+    
+    function changeTheme(themeName, save = true) {
+      document.body.dataset.theme = themeName;
+      if (save) {
+        gameState.profile.theme = themeName;
+        saveState();
+      }
+    }
+    
+    function showNotification(message) {
+      const note = document.createElement('div');
+      note.className = 'notification';
+      note.innerText = message;
+      document.body.appendChild(note);
+      setTimeout(() => note.remove(), 4000);
+    }
+    
+    function showAchievement(title, message) {
+      const achievement = document.getElementById('achievement');
+      achievement.querySelector('h3').innerText = title;
+      achievement.querySelector('p').innerText = message;
+      achievement.classList.add('show');
+      
+      setTimeout(() => {
+        achievement.classList.remove('show');
+      }, 3000);
+    }
+    
+    // --- CORE GAME LOGIC ---
+    document.getElementById("mainBtn").addEventListener('click', () => {
+      // Energy tushadi
+      if (gameState.profile.energy > 0) {
+        gameState.profile.energy = Math.max(0, gameState.profile.energy - 1);
+      } else {
+        showNotification("Energiyangiz tugadi! Biroz kuting.");
+        return;
+      }
+      
+      gameState.ochko += gameState.clickMultiplier;
+      gameState.totalClicks++;
+      updateAllUI();
+      saveState();
+      showGhosts();
+      checkAchievements();
+      
+      // Vazifa uchun hisoblash
+      if (gameState.missions.mission1.status === "active") {
+        gameState.missions.mission1.clicks++;
+        if (Date.now() - gameState.missions.mission1.startTime > 10000) {
+          gameState.missions.mission1.status = "failed";
+          showNotification("Vaqt tugadi! Vazifa bajarilmadi.");
+        } else if (gameState.missions.mission1.clicks >= 50) {
+          gameState.missions.mission1.status = "completed";
+          gameState.profile.balance += 10000;
+          showNotification("Tabriklaymiz! Vazifani bajardingiz. 10000 coin qo'shildi!");
+          checkAchievements();
+        }
+      }
+      
+      // Click animation
+      const btn = document.getElementById("mainBtn");
+      btn.classList.remove('pulse');
+      void btn.offsetWidth; // Trigger reflow
+      btn.classList.add('pulse');
+    });
+    
+    function changePlayerName() {
+      const newName = document.getElementById('changeNameInput').value;
+      if (newName && newName.length > 2) {
+        gameState.profile.name = newName;
+        updateAllUI();
+        showNotification("Ismingiz o'zgartirildi!");
+        saveState();
+      } else {
+        showNotification("Ism kamida 3 harfdan iborat bo'lishi kerak!");
+      }
+    }
+    
+    function resetGame() {
+      if (confirm("Rostdan ham barcha yutuqlaringizni o'chirib, o'yinni qaytadan boshlamoqchimisiz?")) {
+        gameState = JSON.parse(JSON.stringify(defaultState));
+        saveState();
+        window.location.reload();
+      }
+    }
+    
+    // --- ACHIEVEMENTS ---
+    const achievements = [
+      { id: 'first_click', title: 'Birinchi bosish', desc: 'Birinchi marta bosish', requirement: 1 },
+      { id: 'click_100', title: '100 ta bosish', desc: '100 marta bosdingiz', requirement: 100 },
+      { id: 'click_1000', title: '1000 ta bosish', desc: '1000 marta bosdingiz', requirement: 1000 },
+      { id: 'score_1000', title: '1000 ochko', desc: '1000 ochkoga erishdingiz', requirement: 1000, type: 'score' },
+      { id: 'score_10000', title: '10,000 ochko', desc: '10,000 ochkoga erishdingiz', requirement: 10000, type: 'score' },
+      { id: 'level_5', title: 'Daraja 5', desc: '5-darajaga erishing', requirement: 5, type: 'level' },
+      { id: 'level_10', title: 'Daraja 10', desc: '10-darajaga erishing', requirement: 10, type: 'level' },
+      { id: 'shop_first', title: 'Birinchi xarid', desc: 'Do\'kondan biror narsa sotib oling', requirement: 1, type: 'shop' },
+      { id: 'theme_change', title: 'Stilshunos', desc: 'Dizayn temasi o\'zgartiring', requirement: 1, type: 'theme' },
+      { id: 'mission_complete', title: 'Vazifa bajaruvchi', desc: 'Biror vazifani bajaring', requirement: 1, type: 'mission' },
+      { id: 'shop_5_items', title: 'Do\'konchi', desc: '5 ta narsa sotib oling', requirement: 5, type: 'shop_items' },
+      { id: 'balance_1000', title: 'Boyligingiz', desc: 'Hisobingizda 1000 coin bo\'lsin', requirement: 1000, type: 'balance' },
+      { id: 'button_explorer', title: 'Tugma tadqiqotchisi', desc: 'Barcha maxsus tugmalarni sinab ko\'ring', requirement: 6, type: 'buttons' },
+      { id: 'cosmic_master', title: 'Kosmik master', desc: 'Kosmik tugmani bosish', requirement: 1, type: 'cosmic_button' },
+      { id: 'rainbow_chaser', title: 'Rainbow chaser', desc: 'Rainbow tugmani bosish', requirement: 1, type: 'rainbow_button' },
+      { id: 'energy_master', title: 'Energiya master', desc: '100% energiyaga erishing', requirement: 100, type: 'energy' },
+      { id: 'defense_100', title: 'Himoya', desc: '100 himoya ochko yig\'ing', requirement: 100, type: 'defense' },
+      { id: 'auto_clicker_1000', title: 'Avtomat', desc: 'Avto-kliker 1000 ochko berishini kutib turing', requirement: 1000, type: 'auto_clicker' },
+      { id: 'cosmic_portal', title: 'Kosmik portal', desc: 'Kosmik portaldan o\'ting', requirement: 1, type: 'portal' },
+      { id: 'ultimate_power', title: 'Ultimate kuch', desc: '1000000 ochkoga erishing', requirement: 1000000, type: 'score' }
+    ];
+    
+    function checkAchievements() {
+      achievements.forEach(ach => {
+        if (!gameState.achievements.includes(ach.id)) {
+          let achieved = false;
+          
+          switch(ach.type) {
+            case 'score':
+              achieved = gameState.ochko >= ach.requirement;
+              break;
+            case 'level':
+              achieved = gameState.profile.level >= ach.requirement;
+              break;
+            case 'shop':
+              achieved = gameState.ownedItems.length >= ach.requirement;
+              break;
+            case 'shop_items':
+              achieved = gameState.missions.mission3.itemsBought >= ach.requirement;
+              break;
+            case 'theme':
+              achieved = gameState.profile.theme !== defaultState.profile.theme;
+              break;
+            case 'mission':
+              achieved = Object.values(gameState.missions).some(m => m.status === "completed");
+              break;
+            case 'balance':
+              achieved = gameState.profile.balance >= ach.requirement;
+              break;
+            case 'buttons':
+              achieved = gameState.buttonPresses && Object.keys(gameState.buttonPresses).length >= ach.requirement;
+              break;
+            case 'cosmic_button':
+              achieved = gameState.buttonPresses && gameState.buttonPresses.cosmic >= 1;
+              break;
+            case 'rainbow_button':
+              achieved = gameState.buttonPresses && gameState.buttonPresses.rainbow >= 1;
+              break;
+            case 'energy':
+              achieved = gameState.profile.energy >= ach.requirement;
+              break;
+            case 'defense':
+              achieved = gameState.profile.defense >= ach.requirement;
+              break;
+            case 'auto_clicker':
+              achieved = gameState.missions.mission4.autoClicks >= ach.requirement;
+              break;
+            case 'portal':
+              achieved = gameState.portalUsed;
+              break;
+            default:
+              achieved = gameState.totalClicks >= ach.requirement;
+          }
+          
+          if (achieved) {
+            gameState.achievements.push(ach.id);
+            showAchievement(ach.title, ach.desc);
+            saveState();
+            renderAchievements(); // Yangi yutuqni ro'yxatda ko'rsatish
+          }
+        }
+      });
+    }
+    
+    function renderAchievements() {
+      const container = document.getElementById('achievementsList');
+      container.innerHTML = '';
+      
+      achievements.forEach(ach => {
+        const isUnlocked = gameState.achievements.includes(ach.id);
+        container.innerHTML += `
+          <div class="shop-item" style="opacity: ${isUnlocked ? '1' : '0.5'}; border-left-color: ${isUnlocked ? 'var(--secondary-glow)' : '#555'}">
+            <h4><i class="fas fa-${isUnlocked ? 'trophy' : 'lock'}"></i> ${ach.title}</h4>
+            <p>${ach.desc}</p>
+            <div class="stat-item">
+              <span>Holati:</span>
+              <span>${isUnlocked ? '🏆 Qo\'lga kiritilgan' : '🔒 Yopiq'}</span>
+            </div>
+          </div>
+        `;
+      });
+    }
+    
+    // --- SHOP LOGIC ---
+    const shopItems = [
+      { id: 'click-power-1', name: '+1 Kuch', price: 100, desc: 'Har bir bosish uchun +1 ochko qo\'shadi.' },
+      { id: 'autoclick-1', name: 'Avto-Kliker v1', price: 1000, desc: 'Sekundiga 1 ochko avtomatik qo\'shadi.' },
+      { id: 'theme-pack', name: 'Dizaynlar To\'plami', price: 5000, desc: 'Barcha dizayn temalarini ochadi.' },
+      { id: 'click-power-5', name: '+5 Kuch', price: 10000, desc: 'Har bir bosish uchun +5 ochko qo\'shadi.' },
+      { id: 'lucky-click', name: 'Omadli Klik', price: 50000, desc: '1% imkoniyat bilan 100x bonus ochko.' },
+      { id: 'autoclick-10', name: 'Avto-Kliker v2', price: 100000, desc: 'Sekundiga 10 ochko avtomatik qo\'shadi.' },
+      { id: 'offline-earnings', name: 'Oflayn Daromad', price: 500000, desc: 'Oflayn bo\'lganingizda ham ochko yig\'iladi.' },
+      { id: 'click-power-50', name: '+50 Kuch', price: 1000000, desc: 'Har bir bosish uchun +50 ochko.' },
+      { id: 'autoclick-100', name: 'Avto-Kliker v3', price: 10000000, desc: 'Sekundiga 100 ochko avtomatik.' },
+      { id: 'semi-admin', name: 'Yarim-Admin', price: 1e13, desc: 'Chat va maxsus imkoniyatlar.' },
+      { id: 'full-admin', name: 'To\'liq Admin', price: 5e13, desc: 'Admin paneliga kirish huquqi.' },
+      { id: 'cosmetic-owner', name: 'Kosmetik Owner', price: 1e14, desc: '"Owner" unvoni (kuch bermaydi).' },
+      { id: 'chat-color', name: 'Chat Ranglari', price: 20000, desc: 'Chatingiz rang-barang bo\'ladi.' },
+      { id: 'ghost-theme', name: 'Arvoh Effekti', price: 200000, desc: 'Fonni arvohlar egallaydi.' },
+      { id: 'send-level', name: 'Do\'stga Daraja Yuborish', price: 1000000, desc: 'Boshqa foydalanuvchiga daraja yuborish.' },
+      { id: 'double-income', name: 'Ikki barobar daromad', price: 2000000, desc: 'Barcha daromadlaringiz ikki barobarga oshadi.' },
+      { id: 'time-warp', name: 'Vaqtga sakrash', price: 5000000, desc: '1 soat ichida 1000 ochko qo\'shadi.' },
+      { id: 'super-click', name: 'Super Bosish', price: 10000000, desc: 'Bosish kuchini 100 ga oshiradi.' },
+      { id: 'free-coins-1000', name: 'Bepul 1000 Coin', price: 0, desc: '1000 coin bepul oling (faqat bir marta).' },
+      { id: 'free-coins-5000', name: 'Bepul 5000 Coin', price: 0, desc: '5000 coin bepul oling (faqat bir marta).' },
+      { id: 'free-click-power', name: 'Bepul +10 Kuch', price: 0, desc: 'Bosish kuchini 10 ga oshiring (faqat bir marta).' },
+      { id: 'energy-boost', name: 'Energiya zaryadi', price: 50000, desc: 'Energiyangizni 50% ga oshiradi.' },
+      { id: 'defense-shield', name: 'Himoya qalqoni', price: 100000, desc: 'Himoyangizni 10 ga oshiradi.' },
+      { id: 'cosmic-portal', name: 'Kosmik portal', price: 100000000, desc: 'Maxsus kosmik portal orqali ochko oling.' },
+      { id: 'ultimate-power', name: 'Ultimate kuch', price: 1e15, desc: 'Cheksiz kuch va ochko.' }
+    ];
+    
+    function renderShop() {
+      const container = document.getElementById('shopItemsContainer');
+      container.innerHTML = '';
+      
+      shopItems.forEach(item => {
+        const owned = gameState.ownedItems.includes(item.id);
+        const affordable = gameState.ochko >= item.price;
+        const isFree = item.price === 0;
+        
+        // Bepul buyumlar faqat bir marta sotib olinadi
+        const canBuy = isFree ? !owned : affordable && !owned;
+        
+        container.innerHTML += `
+          <div class="shop-item">
+            <div class="price-badge">
+              <i class="fas fa-coins coin-icon"></i>
+              ${isFree ? 'BEPUL' : item.price.toLocaleString('en-US')}
+            </div>
+            <h4>${item.name} ${isFree ? '<span class="badge badge-new">BEPUL</span>' : ''}</h4>
+            <p>${item.desc}</p>
+            <button onclick="buyItem('${item.id}')" ${!canBuy ? 'disabled' : ''} ${!canBuy && !owned ? 'style="opacity:0.5;"' : ''}>
+              ${owned ? '<i class="fas fa-check"></i> Olingan' : (canBuy ? '<i class="fas fa-shopping-cart"></i> Sotib olish' : '<i class="fas fa-coins"></i> ' + (isFree ? 'Oldin olgan' : 'Yetarli emas'))}
+            </button>
+          </div>`;
+      });
+    }
+    
+    function buyItem(itemId) {
+      const item = shopItems.find(i => i.id === itemId);
+      if (!item || gameState.ownedItems.includes(itemId)) return;
+      
+      const isFree = item.price === 0;
+      const canAfford = gameState.ochko >= item.price;
+      
+      if (isFree || canAfford) {
+        if (!isFree) {
+          gameState.ochko -= item.price;
+        }
+        gameState.ownedItems.push(itemId);
+        applyItemEffect(itemId);
+        showNotification(`Siz "${item.name}"ni ${isFree ? 'bepul' : 'sotib'} oldingiz!`);
+        renderShop();
+        updateAllUI();
+        saveState();
+        checkAchievements(); // Yangi xarid uchun yutuqni tekshirish
+        
+        // Vazifa uchun hisoblash
+        if (item.id.startsWith('click-power') || item.id === 'super-click' || item.id === 'free-click-power') {
+          gameState.missions.mission3.itemsBought++;
+          checkMission(3);
+        }
+      } else {
+        showNotification("Ochko yetarli emas!");
+      }
+    }
+    
+    function applyItemEffect(itemId) {
+      switch (itemId) {
+        case 'click-power-1': gameState.clickMultiplier += 1; break;
+        case 'click-power-5': gameState.clickMultiplier += 5; break;
+        case 'click-power-50': gameState.clickMultiplier += 50; break;
+        case 'super-click': gameState.clickMultiplier += 100; break;
+        case 'free-click-power': gameState.clickMultiplier += 10; break;
+        case 'autoclick-1': gameState.stats.ochkoPerSecond += 1; break;
+        case 'autoclick-10': gameState.stats.ochkoPerSecond += 10; break;
+        case 'autoclick-100': gameState.stats.ochkoPerSecond += 100; break;
+        case 'double-income': gameState.stats.ochkoPerSecond *= 2; break;
+        case 'semi-admin': 
+          if (gameState.profile.rank !== 'Admin') {
+            gameState.profile.rank = 'Yarim-Admin'; 
+            showNotification("Endi siz Yarim-Adminsiz!");
+          }
+          break;
+        case 'full-admin': 
+          gameState.profile.rank = 'Admin'; 
+          showNotification("Endi siz To'liq Adminsiz!");
+          break;
+        case 'cosmetic-owner': 
+          gameState.profile.rank = 'Owner'; 
+          showNotification("Sizga 'Owner' unvoni berildi!");
+          break;
+        case 'ghost-theme': 
+          showNotification("Arvoh effekt yoqildi! Fonga kursor olib boring.");
+          break;
+        case 'send-level': 
+          promptSendLevel(); 
+          break;
+        case 'theme-pack':
+          showNotification("Barcha dizaynlar endi mavjud!");
+          break;
+        case 'time-warp':
+          gameState.ochko += 1000;
+          showNotification("Vaqtga sakrash! 1000 ochko qo'shildi!");
+          break;
+        case 'free-coins-1000':
+          gameState.profile.balance += 1000;
+          showNotification("1000 coin hisobingizga qo'shildi!");
+          break;
+        case 'free-coins-5000':
+          gameState.profile.balance += 5000;
+          showNotification("5000 coin hisobingizga qo'shildi!");
+          break;
+        case 'energy-boost':
+          gameState.profile.energy = Math.min(100, gameState.profile.energy + 50);
+          showNotification("Energiyangiz 50% ga oshdi!");
+          break;
+        case 'defense-shield':
+          gameState.profile.defense += 10;
+          showNotification("Himoyangiz 10 ga oshdi!");
+          break;
+        case 'cosmic-portal':
+          useCosmicPortal();
+          break;
+        case 'ultimate-power':
+          gameState.ochko = 999999999999999;
+          gameState.clickMultiplier = 1000000;
+          gameState.stats.ochkoPerSecond = 10000000;
+          showNotification("ULTIMATE KUCH BERILDI!");
+          break;
+      }
+      updateAllUI();
+    }
+    
+    function promptSendLevel() {
+      let who = prompt("Kimga daraja yuboriladi? (login)");
+      if (!who) return;
+      let user = gameState.users.find(u => u.name === who);
+      if (user) {
+        let lvl = prompt("Qaysi darajani yuborasiz? (1-999999)");
+        lvl = Math.max(1, Math.min(999999, parseInt(lvl)));
+        user.level = lvl;
+        showNotification("Daraja yuborildi!");
+        saveState();
+      } else {
+        showNotification("Bunday foydalanuvchi topilmadi!");
+      }
+    }
+    
+    // --- MISSIONS ---
+    function startMission(id) {
+      if (id === 1) {
+        gameState.missions.mission1.status = "active";
+        gameState.missions.mission1.startTime = Date.now();
+        gameState.missions.mission1.clicks = 0;
+        document.getElementById('mission1Status').innerText = "Faol (0/50)";
+        showNotification("Vazifa boshlandi! 10 soniya ichida 50 marta bosing!");
+        
+        // 10 soniya o'tgach vazifani avtomatik tekshirish
+        setTimeout(() => {
+          if (gameState.missions.mission1.status === "active") {
+            gameState.missions.mission1.status = "failed";
+            document.getElementById('mission1Status').innerText = "Bajarilmagan";
+            showNotification("Vaqt tugadi! Vazifa bajarilmadi.");
+          }
+        }, 10000);
+      }
+    }
+    
+    function checkMission(id) {
+      if (id === 2) {
+        if (gameState.ochko >= 100000 && gameState.missions.mission2.status !== "completed") {
+          gameState.missions.mission2.status = "completed";
+          gameState.profile.balance += 50000;
+          document.getElementById('mission2Status').innerText = "Bajarilgan";
+          showNotification("Tabriklaymiz! Vazifani bajardingiz. 50000 coin qo'shildi!");
+          checkAchievements(); // Vazifa yutuqlarini tekshirish
+        } else if (gameState.missions.mission2.status === "completed") {
+          showNotification("Bu vazifa allaqachon bajarilgan!");
+        } else {
+          showNotification("Shartlar bajarilmagan!");
+        }
+      }
+      
+      if (id === 3) {
+        if (gameState.missions.mission3.itemsBought >= 5 && gameState.missions.mission3.status !== "completed") {
+          gameState.missions.mission3.status = "completed";
+          gameState.profile.balance += 20000;
+          document.getElementById('mission3Status').innerText = "Bajarilgan";
+          showNotification("Tabriklaymiz! Vazifani bajardingiz. 20000 coin qo'shildi!");
+          checkAchievements();
+        } else if (gameState.missions.mission3.status === "completed") {
+          // showNotification("Bu vazifa allaqachon bajarilgan!");
+        } else {
+          document.getElementById('mission3Status').innerText = `Bajarilmagan (${gameState.missions.mission3.itemsBought}/5)`;
+        }
+      }
+      
+      if (id === 4) {
+        if (gameState.stats.ochkoPerSecond >= 1000 && gameState.missions.mission4.status !== "completed") {
+          gameState.missions.mission4.status = "completed";
+          gameState.missions.mission4.autoClicks = gameState.stats.ochkoPerSecond;
+          document.getElementById('mission4Status').innerText = "Bajarilgan";
+          gameState.profile.balance += 100000;
+          showNotification("Tabriklaymiz! Vazifani bajardingiz. 100000 coin qo'shildi!");
+          checkAchievements();
+        } else if (gameState.missions.mission4.status === "completed") {
+          showNotification("Bu vazifa allaqachon bajarilgan!");
+        } else {
+          showNotification("Shartlar bajarilmagan!");
+        }
+      }
+    }
+    
+    // --- BUTTON EFFECTS ---
+    function activateButtonEffect(type) {
+      const description = document.getElementById('buttonEffectDescription');
+      
+      // Button press tracking for achievements
+      if (!gameState.buttonPresses) gameState.buttonPresses = {};
+      if (!gameState.buttonPresses[type]) gameState.buttonPresses[type] = 0;
+      gameState.buttonPresses[type]++;
+      saveState();
+      checkAchievements();
+      
+      switch(type) {
+        case 'fire':
+          description.innerHTML = "<p style='color:#ff416c;'><i class='fas fa-fire'></i> Olov effekti faollashdi! Ekranning atrofi qizilga bo'yalmoqda...</p>";
+          document.body.style.filter = "hue-rotate(0deg) contrast(1.2)";
+          setTimeout(() => document.body.style.filter = "", 2000);
+          break;
+        case 'water':
+          description.innerHTML = "<p style='color:#2193b0;'><i class='fas fa-tint'></i> Suv effekti faollashdi! Ekranning atrofi ko'kka bo'yalmoqda...</p>";
+          document.body.style.filter = "hue-rotate(180deg) contrast(1.2)";
+          setTimeout(() => document.body.style.filter = "", 2000);
+          break;
+        case 'earth':
+          description.innerHTML = "<p style='color:#834d9b;'><i class='fas fa-mountain'></i> Yer effekti faollashdi! Ekranning atrofi binafshaga bo'yalmoqda...</p>";
+          document.body.style.filter = "hue-rotate(270deg) contrast(1.2)";
+          setTimeout(() => document.body.style.filter = "", 2000);
+          break;
+        case 'air':
+          description.innerHTML = "<p style='color:#00b09b;'><i class='fas fa-wind'></i> Havo effekti faollashdi! Ekranning atrofi yashilga bo'yalmoqda...</p>";
+          document.body.style.filter = "hue-rotate(90deg) contrast(1.2)";
+          setTimeout(() => document.body.style.filter = "", 2000);
+          break;
+        case 'cosmic':
+          description.innerHTML = "<p style='color:#6a11cb;'><i class='fas fa-star'></i> Kosmik effekti faollashdi! Ekranning atrofi tuxum rangga bo'yalmoqda...</p>";
+          document.body.style.filter = "hue-rotate(300deg) contrast(1.5) saturate(1.5)";
+          setTimeout(() => document.body.style.filter = "", 2000);
+          break;
+        case 'rainbow':
+          description.innerHTML = "<p style='background: linear-gradient(to right, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'><i class='fas fa-rainbow'></i> Rainbow effekti faollashdi! Ekranning atrofi chang rangga bo'yalmoqda...</p>";
+          document.body.style.filter = "contrast(1.5) saturate(2)";
+          setTimeout(() => document.body.style.filter = "", 2000);
+          break;
+      }
+    }
+    
+    // --- COSMIC PORTAL ---
+    function useCosmicPortal() {
+      const portal = document.getElementById('cosmicPortal');
+      portal.style.display = 'block';
+      
+      setTimeout(() => {
+        gameState.ochko += 1000000;
+        gameState.portalUsed = true;
+        showNotification("Kosmik portaldan o'tdingiz! 1,000,000 ochko qo'shildi!");
+        portal.style.display = 'none';
+        updateAllUI();
+        saveState();
+        checkAchievements();
+      }, 3000);
+    }
+    
+    // --- POWER-UPS ---
+    function createRandomPowerUps() {
+      setInterval(() => {
+        if (Math.random() < 0.3) { // 30% ehtimollik
+          createPowerUp();
+        }
+      }, 10000); // 10 sekundda bir marta
+    }
+    
+    function createPowerUp() {
+      const powerUp = document.createElement('div');
+      powerUp.className = 'power-up';
+      powerUp.innerHTML = '⚡';
+      powerUp.style.left = Math.random() * 80 + 10 + 'vw';
+      powerUp.style.top = Math.random() * 60 + 20 + 'vh';
+      
+      powerUp.addEventListener('click', () => {
+        gameState.profile.energy = Math.min(100, gameState.profile.energy + 20);
+        gameState.profile.defense += 5;
+        showNotification("Kuchli kuch olingan! Energiya +20, Himoya +5");
+        powerUp.remove();
+        updateAllUI();
+        saveState();
+      });
+      
+      document.body.appendChild(powerUp);
+      
+      // 10 soniyadan keyin yo'q etish
+      setTimeout(() => {
+        if (powerUp.parentNode) {
+          powerUp.remove();
+        }
+      }, 10000);
+    }
+    
+    // --- MODAL & STATS LOGIC ---
+    function openModal(modalId) {
+      if (modalId === 'shopModal') renderShop();
+      if (modalId === 'statistikaModal') updateStatsUI();
+      if (modalId === 'profilModal') document.getElementById('changeNameInput').value = gameState.profile.name;
+      if (modalId === 'chatModal') renderChat();
+      if (modalId === 'achievementsModal') renderAchievements();
+      if (modalId === 'missionsModal') updateMissionsUI();
+      if (modalId === 'buttonsModal') document.getElementById('buttonEffectDescription').innerHTML = "<p>Tugma bosish orqali effektlarni kuzating...</p>";
+      if (modalId === 'chatModal') document.getElementById('chatModal').style.display = 'flex';
+      else document.getElementById(modalId).style.display = 'flex';
+    }
+    
+    function closeAllModals() {
+      document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
+      saveState();
+    }
+    
+    function updateStatsUI() {
+      document.getElementById('totalClicksStat').innerText = gameState.totalClicks.toLocaleString();
+      document.getElementById('currentScoreStat').innerText = Math.floor(gameState.ochko).toLocaleString();
+      document.getElementById('clickPowerStat').innerText = gameState.clickMultiplier.toLocaleString();
+      document.getElementById('incomePerSecondStat').innerText = gameState.stats.ochkoPerSecond.toLocaleString();
+      document.getElementById('offlineIncomeStat').innerText = gameState.ownedItems.includes('offline-earnings') ? "✅ Bor" : "❌ Yo'q";
+      document.getElementById('achievementsStat').innerText = `${gameState.achievements.length}/20`;
+      document.getElementById('energyStat').innerText = gameState.profile.energy + "%";
+      document.getElementById('defenseStat').innerText = gameState.profile.defense;
+    }
+    
+    function updateMissionsUI() {
+      document.getElementById('mission1Status').innerText = 
+        gameState.missions.mission1.status === "completed" ? "Bajarilgan" :
+        gameState.missions.mission1.status === "active" ? `Faol (${gameState.missions.mission1.clicks}/50)` :
+        "Bajarilmagan";
+        
+      document.getElementById('mission2Status').innerText = 
+        gameState.missions.mission2.status === "completed" ? "Bajarilgan" : "Bajarilmagan";
+        
+      document.getElementById('mission3Status').innerText = 
+        gameState.missions.mission3.status === "completed" ? "Bajarilgan" : `Bajarilmagan (${gameState.missions.mission3.itemsBought}/5)`;
+        
+      document.getElementById('mission4Status').innerText = 
+        gameState.missions.mission4.status === "completed" ? "Bajarilgan" : "Bajarilmagan";
+    }
+    
+    window.onclick = function (event) {
+      if (event.target.classList.contains('modal-overlay') && 
+          !event.target.closest('.secret-panel')) {
+        closeAllModals();
+      }
+    }
+    
+    // --- CHAT DEMO ---
+    function renderChat() {
+      const chatDiv = document.getElementById('chatMessages');
+      chatDiv.innerHTML = '';
+      
+      // Chat xabarlari
+      gameState.chat.slice(-40).forEach(m => {
+        let color = "#fff";
+        if (gameState.ownedItems.includes("chat-color")) color = `hsl(${Math.random() * 360},80%,75%)`;
+        
+        // Xabarning o'zini aniqlash
+        const isOwnMessage = m.user.startsWith(gameState.profile.name);
+        
+        chatDiv.innerHTML += `
+          <div class="chat-message ${isOwnMessage ? 'own' : 'other'}">
+            <div class="chat-user" style="color:${color};">
+              ${m.user}
+              ${gameState.profile.rank === 'Owner' || gameState.profile.rank === 'Admin' || gameState.profile.rank === 'Sayt Qirol' ? 
+                `<button onclick="showTransferModal('${m.userName}')" style="background:none;border:none;color:var(--primary-glow);cursor:pointer;font-size:12px;">.Transfer</button>` : 
+                ''}
+            </div>
+            <div class="chat-text">${m.text}</div>
+          </div>
+        `;
+      });
+      
+      chatDiv.scrollTop = chatDiv.scrollHeight;
+    }
+    
+    function sendChat() {
+      let txt = document.getElementById('chatInput').value;
+      if (txt.trim().length > 0) {
+        gameState.chat.push({
+          user: `${gameState.profile.name} (${gameState.profile.rank})`,
+          userName: gameState.profile.name,
+          text: txt.trim()
+        });
+        document.getElementById('chatInput').value = '';
+        renderChat();
+        saveState();
+      }
+    }
+    
+    // Enter tugmasi bilan yuborish
+    document.getElementById('chatInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        sendChat();
+      }
+    });
+    
+    // Chat yuborish tugmasi
+    document.getElementById('chatSendBtn').addEventListener('click', sendChat);
+    
+    // Transfer modal (faqat owner/admin uchun)
+    function showTransferModal(userName) {
+      if (gameState.profile.rank !== 'Owner' && gameState.profile.rank !== 'Admin' && gameState.profile.rank !== 'Sayt Qirol') return;
+      
+      const amount = prompt(`Qancha ochko yubormoqchisiz ${userName}ga?`);
+      if (amount && !isNaN(amount) && parseInt(amount) > 0) {
+        // Bu yerda haqiqiy transfer logikasi bo'lishi kerak
+        gameState.ochko -= parseInt(amount);
+        showNotification(`${userName}ga ${amount} ochko yuborildi!`);
+        saveState();
+        updateAllUI();
+      }
+    }
+    
+    // --- ARVOHLAR (ghosts) ANIMATSIYASI ---
+    let ghostsActive = false;
+    
+    function showGhosts() {
+      if (gameState.ownedItems.includes("ghost-theme")) {
+        ghostsActive = true;
+        for (let i = 0; i < 4; i++) {
+          createGhost();
+        }
+        setTimeout(() => { ghostsActive = false; }, 1400);
+      }
+    }
+    
+    function createGhost() {
+      let g = document.createElement('div');
+      g.className = 'ghost';
+      g.innerText = ["👻", "👾", "🦹‍♂️", "🧟‍♂️", "🦹‍♀️", "🧟‍♀️"][Math.floor(Math.random() * 6)];
+      g.style.left = (Math.random() * 90 + 4) + "vw";
+      g.style.top = (Math.random() * 70 + 12) + "vh";
+      g.style.opacity = 0.15 + Math.random() * 0.2;
+      document.body.appendChild(g);
+      setTimeout(() => g.remove(), 1800 + Math.random() * 600);
+    }
+    
+    document.getElementById('bgContainer').addEventListener('mousemove', function (e) {
+      if (gameState.ownedItems.includes("ghost-theme") && !ghostsActive) {
+        for (let i = 0; i < 6; i++) createGhost();
+        ghostsActive = true;
+        setTimeout(() => { ghostsActive = false; }, 2200);
+      }
+    });
+    
+    document.getElementById('mainBtn').addEventListener('mousedown', () => {
+      if (gameState.ownedItems.includes("ghost-theme")) showGhosts();
+    });
+    
+    // --- OWNER ADMIN PANEL (Ctrl+Alt+F) ---
+    document.addEventListener('keydown', function (e) {
+      if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'f') {
+        // Owner, Admin yoki Sayt Qirol uchun
+        if (gameState.profile.rank === "Owner" || gameState.profile.rank === "Admin" || gameState.profile.rank === "Sayt Qirol") {
+          openOwnerPanel();
+        } else {
+          // Oddiy foydalanuvchilar uchun maxsus panel
+          openSecretPanel();
+        }
+      }
+    });
+    
+    function openOwnerPanel() {
+      document.getElementById('ownerPanelModal').style.display = 'flex';
+      let html = `<b><i class="fas fa-users"></i> Saytga kirganlar:</b><ul>`;
+      gameState.users.forEach(u => {
+        html += `<li><b>${u.name}</b> (${u.rank}) - darajasi: ${u.level}</li>`;
+      });
+      html += `</ul><hr>`;
+      
+      // Sayt Qirol uchun maxsus buyruqlar
+      if (gameState.profile.rank === "Owner" || gameState.profile.rank === "Sayt Qirol") {
+        html += `
+          <div class="input-group">
+            <label for="ownerCmd"><i class="fas fa-terminal"></i> Buyruq kiriting:</label>
+            <input id="ownerCmd" style="width:100%;" placeholder="inf, clear, admin, daraja yuborish, coin berish, theme all, portal...">
+          </div>
+          <button onclick="processOwnerCmd()"><i class="fas fa-play"></i> Bajarish</button>
+          <div id="ownerResult" style="margin-top:15px;padding:10px;background:rgba(0,0,0,0.3);border-radius:8px;"></div>
+        `;
+      }
+      
+      document.getElementById('ownerPanelBody').innerHTML = html;
+    }
+    
+    function closeOwnerPanel() { 
+      document.getElementById('ownerPanelModal').style.display = 'none'; 
+    }
+    
+    function processOwnerCmd() {
+      const val = document.getElementById('ownerCmd').value.trim().toLowerCase();
+      const res = document.getElementById('ownerResult');
+      
+      if (val === "inf") {
+        gameState.ochko = 999999999999999;
+        gameState.clickMultiplier = 1000000;
+        gameState.stats.ochkoPerSecond = 10000000;
+        gameState.profile.energy = 10000;
+        gameState.profile.defense = 10000;
+        updateAllUI();
+        showNotification("Cheksiz ochko, kuch va daromad berildi!");
+        res.innerHTML = "<span style='color:#00ff9d;'><i class='fas fa-check-circle'></i> Cheksiz imkoniyatlar berildi!</span>";
+      } else if (val === "clear") {
+        gameState.ochko = 0; 
+        gameState.totalClicks = 0; 
+        gameState.clickMultiplier = 1;
+        gameState.stats.ochkoPerSecond = 0;
+        gameState.profile.energy = 100;
+        gameState.profile.defense = 0;
+        updateAllUI();
+        res.innerHTML = "<span style='color:#ff6b6b;'><i class='fas fa-trash'></i> Ochko va statistika tozalandi!</span>";
+      } else if (val === "admin") {
+        let who = prompt("Kim admin bo'ladi? (login)");
+        if (who && who !== "OWNER") {
+          let user = gameState.users.find(u => u.name === who);
+          if (user) { 
+            user.rank = "Admin"; 
+            showNotification("Yangi admin tayinlandi!"); 
+            updateAllUI(); 
+            saveState(); 
+            res.innerHTML = "<span style='color:#4ecdc4;'><i class='fas fa-user-shield'></i> Yangi admin tayinlandi!</span>";
+          } else {
+            showNotification("Bunday foydalanuvchi yo'q!");
+            res.innerHTML = "<span style='color:#ff6b6b;'><i class='fas fa-exclamation-triangle'></i> Foydalanuvchi topilmadi!</span>";
+          }
+        }
+      } else if (val === "daraja yuborish") {
+        promptSendLevel();
+        res.innerHTML = "<span style='color:#4ecdc4;'><i class='fas fa-paper-plane'></i> Daraja yuborish funksiyasi ishga tushdi!</span>";
+      } else if (val.startsWith("coin berish")) {
+        let parts = val.split(" ");
+        if (parts.length >= 4) {
+          let who = parts[2];
+          let amount = parseInt(parts[3]);
+          if (who && amount && amount > 0) {
+            let user = gameState.users.find(u => u.name === who);
+            if (user) {
+              gameState.profile.balance += amount;
+              showNotification(`${who}ga ${amount} coin berildi!`);
+              res.innerHTML = `<span style='color:#4ecdc4;'><i class='fas fa-coins'></i> ${who}ga ${amount} coin berildi!</span>`;
+              updateAllUI();
+            } else {
+              showNotification("Foydalanuvchi topilmadi!");
+              res.innerHTML = "<span style='color:#ff6b6b;'><i class='fas fa-exclamation-triangle'></i> Foydalanuvchi topilmadi!</span>";
+            }
+          }
+        } else {
+          res.innerHTML = "<span style='color:#ff6b6b;'><i class='fas fa-exclamation-triangle'></i> Noto'g'ri format! (coin berish [login] [miqdor])</span>";
+        }
+      } else if (val === "theme all") {
+        // Barcha temalarni ochish
+        showNotification("Barcha dizayn temalari ochiq!");
+        res.innerHTML = "<span style='color:#4ecdc4;'><i class='fas fa-palette'></i> Barcha temalar ochiq!</span>";
+      } else if (val === "portal") {
+        useCosmicPortal();
+        res.innerHTML = "<span style='color:#4ecdc4;'><i class='fas fa-star'></i> Kosmik portal faollashtirildi!</span>";
+      } else {
+        res.innerHTML = "<span style='color:#ff6b6b;'><i class='fas fa-exclamation-triangle'></i> Noto'g'ri buyruq!</span>";
+      }
+      
+      saveState();
+    }
+    
+    // --- SETTINGS ---
+    function toggleSound() {
+      gameState.settings.soundEnabled = !gameState.settings.soundEnabled;
+      showNotification(`Ovoz ${gameState.settings.soundEnabled ? 'yoqildi' : 'o\'chirildi'}`);
+      saveState();
+    }
+    
+    function toggleAutoClicker() {
+      gameState.settings.autoClickerEnabled = !gameState.settings.autoClickerEnabled;
+      showNotification(`Avto-kliker ${gameState.settings.autoClickerEnabled ? 'yoqildi' : 'o\'chirildi'}`);
+      saveState();
+    }
+  </script>
+</body>
+</html>
